@@ -1,26 +1,104 @@
 @import "tailwindcss";
 
+@theme {
+  --color-ink: #0a0a0a;
+  --color-ink-2: #111111;
+  --color-line: #1f1f1f;
+  --color-muted: #8a8a8a;
+  --color-dim: #4a4a4a;
+  --color-accent: #ff2d16;
+  --color-accent-soft: #ff5c47;
+
+  --font-display: var(--font-jamjuree), system-ui, sans-serif;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: #0a0a0a;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #0a0a0a;
+  color: #fff;
+  font-family: var(--font-jamjuree), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Hide native cursor only where we draw our own */
+@media (hover: hover) and (pointer: fine) {
+  body.has-cursor,
+  body.has-cursor * {
+    cursor: none !important;
+  }
+}
+
+::selection {
+  background: #ff2d16;
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #262626;
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ff2d16;
+}
+
+/* ---- Display headings: staggered indent, one word in accent ---- */
+.display {
+  text-transform: uppercase;
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  color: #8a8a8a;
+}
+.display .lead {
+  color: #fff;
+}
+.display .hot {
+  color: #ff2d16;
+}
+.display > span {
+  display: block;
+}
+.display > span:nth-child(2) {
+  padding-left: 0.1em;
+}
+.display > span:nth-child(3) {
+  padding-left: 0.2em;
+}
+
+.eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8a8a8a;
+}
+
+.glow {
+  background:
+    radial-gradient(60% 60% at 50% 40%, rgba(255, 45, 22, 0.13), transparent 70%),
+    radial-gradient(40% 40% at 85% 85%, rgba(255, 45, 22, 0.07), transparent 70%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

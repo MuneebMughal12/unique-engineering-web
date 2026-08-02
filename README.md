@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Unique Construction & Engineering Services — Website
 
-## Getting Started
+Marketing site for **Unique Construction & Engineering Services (Pvt) Limited** — an
+ISO-certified EPC contractor based in Sukkur, Sindh, Pakistan.
 
-First, run the development server:
+> **⚠️ This is a DEMO build for client review — not the finished site.**
+> See [Demo status](#demo-status) below before treating anything here as final.
+
+---
+
+## Stack
+
+| | |
+|---|---|
+| Framework | Next.js 16 (App Router) + React 19 |
+| Language | TypeScript |
+| Styling | Tailwind CSS v4 |
+| Animation | Motion (Framer Motion) + Lenis smooth scroll |
+| Font | Bai Jamjuree (`next/font`) |
+| Hosting | Vercel |
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build   # production build
+npm run start   # serve the production build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Pages
 
-## Learn More
+| Route | Description |
+|---|---|
+| `/` | Hero, about, client grid, services, scroll-driven project showcase, testimonials |
+| `/about` | Company story, mission/vision/values, certifications, clients |
+| `/services` | Eight service disciplines |
+| `/projects` | Filterable project grid |
+| `/projects/[slug]` | Scroll-driven project gallery with prev/next (16 pages, statically generated) |
+| `/contact` | Enquiry form, offices, WhatsApp, map |
 
-To learn more about Next.js, take a look at the following resources:
+## Content
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+All content is **hard-coded** in `src/data/` — there is no CMS or database yet:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `company.ts` — company details, offices, certifications, stats, clients
+- `services.ts` — eight service disciplines
+- `projects.ts` — 16 projects with client, location, scope and images
+- `testimonials.ts` — placeholder testimonials
 
-## Deploy on Vercel
+To change copy, edit these files and redeploy.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Demo status
+
+This build exists so the client can review the design and structure. The following
+are **known and intentional** at this stage:
+
+**Photography is placeholder.** The construction photos in `public/img/` were taken
+from a different contractor's company profile (Eldad Engineering & Construction,
+Kenya) purely to show what the layout looks like with real site photography. They do
+**not** depict Unique Construction's projects and must be replaced with the client's
+own photographs before this site is presented as the company's live website.
+
+**Testimonials are placeholder.** `src/data/testimonials.ts` contains generic,
+unattributed quotes. They are not real client references. Replace them with approved
+testimonials before launch.
+
+**The contact form does not send mail.** Submitting shows a success state only. Wiring
+it to email (Resend → the company inbox) is a pending task.
+
+**No admin panel.** Content is edited in code. A Supabase-backed admin panel where the
+client can add and edit projects themselves is planned but not built.
+
+## Roadmap
+
+- [ ] Replace all photography with the client's own project photos
+- [ ] Replace placeholder testimonials with approved client references
+- [ ] Wire the contact form to email (Resend) and add spam protection
+- [ ] Admin panel (Supabase auth + Postgres + image storage)
+- [ ] Connect custom domain
