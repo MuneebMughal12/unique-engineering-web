@@ -6,7 +6,7 @@ import { clients } from "@/data/company";
 const HEX = "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)";
 
 export default function HexGrid() {
-  const cells = [...clients, "Next can be you"];
+  const cells = [...clients, "Your area next"];
 
   return (
     <div className="relative mx-auto w-full max-w-[520px]">
@@ -27,7 +27,7 @@ export default function HexGrid() {
                 style={{ clipPath: HEX }}
                 className={`flex aspect-square items-center justify-center px-2 text-center transition-colors duration-300 ${
                   isLast
-                    ? "bg-[#1a0e0c] text-[#ff2d16]"
+                    ? "bg-[#1a0e0c] text-[#d2a24c]"
                     : "bg-[#161616] text-[#c9c9c9] group-hover:bg-white group-hover:text-[#0a0a0a]"
                 }`}
               >
@@ -37,7 +37,7 @@ export default function HexGrid() {
               <div
                 aria-hidden
                 style={{ clipPath: HEX }}
-                className="pointer-events-none absolute inset-0 -z-10 scale-110 bg-[#ff2d16] opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-70"
+                className="pointer-events-none absolute inset-0 -z-10 scale-110 bg-[#d2a24c] opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-70"
               />
             </motion.div>
           );

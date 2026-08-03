@@ -2,26 +2,41 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "motion/react";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
 import Typewriter from "../Typewriter";
 import { company } from "@/data/company";
 
 const capabilities = [
-  "Civil Construction",
-  "Mechanical Fabrication",
-  "Electrical & Instrumentation",
-  "Cross-Country Flowlines",
-  "Power Substations",
-  "Design & Drafting",
+  "Architectural Design",
+  "Map Approval",
+  "Grey Structure",
+  "Finishing & Turnkey",
+  "Renovation & Extension",
+  "Interior Design",
 ];
 
 export default function Hero() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+  const backdropY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const backdropScale = useTransform(scrollYProgress, [0, 1], [1.04, 1.14]);
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, 110]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.72, 1], [1, 0.82, 0]);
+  const railX = useTransform(scrollYProgress, [0, 1], [0, 50]);
+
   return (
-    <section className="relative min-h-[100svh] overflow-hidden pt-24">
+    <section ref={ref} className="relative min-h-[100svh] overflow-hidden pt-24">
       {/* backdrop */}
-      <div className="absolute inset-0">
+      <motion.div
+        style={{ y: backdropY, scale: backdropScale }}
+        className="absolute -inset-[8%] will-change-transform"
+      >
         <Image
-          src="/img/substation-gantry.jpg"
+          src="/img/villa-karen.jpg"
           alt=""
           fill
           priority
@@ -31,9 +46,25 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/70 to-[#0a0a0a]/30" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-[#0a0a0a]/60" />
         <div className="glow absolute inset-0" />
+      </motion.div>
+
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+        {[18, 34, 57, 76, 88].map((left, i) => (
+          <motion.span
+            key={left}
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: [0, 0.9, 0.25], y: [18, 0, -34] }}
+            transition={{ duration: 2.8 + i * 0.35, delay: 0.8 + i * 0.22, repeat: Infinity, repeatDelay: 1.4 }}
+            className="absolute h-1.5 w-1.5 rounded-full bg-[#d2a24c] shadow-[0_0_14px_#d2a24c]"
+            style={{ left: `${left}%`, top: `${28 + (i % 3) * 18}%` }}
+          />
+        ))}
       </div>
 
-      <div className="relative mx-auto flex min-h-[calc(100svh-6rem)] max-w-[1400px] flex-col justify-between px-5 pb-10 sm:px-8">
+      <motion.div
+        style={{ y: contentY, opacity: contentOpacity }}
+        className="relative mx-auto flex min-h-[calc(100svh-6rem)] max-w-[1400px] flex-col justify-between px-5 pb-10 will-change-transform sm:px-8"
+      >
         <div className="grid flex-1 items-center gap-10 py-10 lg:grid-cols-[1.35fr_1fr]">
           {/* headline */}
           <div>
@@ -43,7 +74,7 @@ export default function Hero() {
               transition={{ delay: 0.15 }}
               className="eyebrow"
             >
-              Since {company.founded} · Sukkur, Pakistan
+              {company.tagline} · Rawalpindi &amp; Islamabad
             </motion.p>
 
             <motion.h1
@@ -52,11 +83,11 @@ export default function Hero() {
               transition={{ delay: 0.25, duration: 0.7 }}
               className="display mt-4 text-[13vw] leading-[0.88] sm:text-[9vw] lg:text-[6.4vw]"
             >
-              <span className="lead">We build</span>
-              <span className="lead">what powers</span>
+              <span className="lead">We design</span>
+              <span className="lead">&amp; build your</span>
               <span className="hot">
                 <Typewriter
-                  words={["INDUSTRY", "ENERGY", "PAKISTAN", "PROGRESS"]}
+                  words={["HOME", "DREAM", "FUTURE", "SMILE"]}
                 />
               </span>
             </motion.h1>
@@ -67,9 +98,9 @@ export default function Hero() {
               transition={{ delay: 0.5 }}
               className="mt-7 max-w-lg text-sm leading-relaxed text-[#b4b4b4] sm:text-base"
             >
-              An EPC contractor delivering civil, mechanical and E&amp;I projects for
-              Pakistan&rsquo;s oil, gas and power sector — on schedule, to specification,
-              and certified to ISO 9001, 14001 and 45001.
+              A Rawalpindi-based design &amp; construction company — from architectural
+              drawings and society map approval to grey structure, finishing and
+              turnkey handover of your home or commercial project.
             </motion.p>
 
             <motion.div
@@ -80,7 +111,7 @@ export default function Hero() {
             >
               <Link
                 href="/projects"
-                className="rounded-full bg-[#ff2d16] px-6 py-3 text-sm font-medium transition-opacity hover:opacity-85"
+                className="rounded-full bg-[#d2a24c] px-6 py-3 text-sm font-medium text-[#0a0a0a] transition-opacity hover:opacity-85"
               >
                 View our projects
               </Link>
@@ -95,8 +126,9 @@ export default function Hero() {
 
           {/* capability list */}
           <motion.div
-            initial={{ opacity: 0, x: 24 }}
-            animate={{ opacity: 1, x: 0 }}
+            style={{ x: railX }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ delay: 0.45, duration: 0.7 }}
             className="lg:justify-self-end"
           >
@@ -115,13 +147,11 @@ export default function Hero() {
               ))}
             </ul>
 
-            <div className="mt-8 h-px w-full max-w-xs bg-gradient-to-r from-[#ff2d16] to-transparent" />
+            <div className="mt-8 h-px w-full max-w-xs bg-gradient-to-r from-[#d2a24c] to-transparent" />
 
-            <p className="mt-5 text-xs text-[#6a6a6a]">Certified to</p>
-            <p className="mt-1 text-sm text-[#d4d4d4]">
-              ISO 9001 · ISO 14001 · ISO 45001
-            </p>
-            <p className="mt-1 text-sm text-[#d4d4d4]">PEC Contractor No. 226</p>
+            <p className="mt-5 text-xs text-[#6a6a6a]">Approved builder</p>
+            <p className="mt-1 text-sm text-[#d4d4d4]">Rehbar Housing Society</p>
+            <p className="mt-1 text-sm text-[#d4d4d4]">Society &amp; TMA map approval</p>
           </motion.div>
         </div>
 
@@ -131,10 +161,10 @@ export default function Hero() {
           transition={{ delay: 1 }}
           className="flex items-center gap-3 text-xs text-[#6a6a6a]"
         >
-          <span className="h-8 w-px bg-gradient-to-b from-transparent to-[#ff2d16]" />
+          <span className="h-8 w-px bg-gradient-to-b from-transparent to-[#d2a24c]" />
           Scroll down
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }

@@ -6,18 +6,16 @@ import { services } from "@/data/services";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Civil construction, mechanical fabrication, E&I works, cross-country flowlines, power substations, building construction, design and project management.",
+    "Architectural design, map approval, grey structure, finishing and turnkey, renovation and interior design — by Bricks N Builders, Rawalpindi.",
 };
 
 const covers = [
-  "/img/concrete-pour.jpg",
-  "/img/ballast-yard.jpg",
-  "/img/control-panels.jpg",
-  "/img/cable-trench.jpg",
-  "/img/substation-yard.jpg",
-  "/img/institutional-building.jpg",
   "/img/planning-gantt.jpg",
   "/img/survey-setout.jpg",
+  "/img/concrete-pour.jpg",
+  "/img/interior-floor.jpg",
+  "/img/townhouse-karen.jpg",
+  "/img/hall-interior.jpg",
 ];
 
 export default function ServicesPage() {
@@ -73,7 +71,7 @@ export default function ServicesPage() {
                 <ul className="mt-7 grid gap-2.5 sm:grid-cols-2">
                   {s.points.map((pt) => (
                     <li key={pt} className="flex gap-3 text-sm text-[#b4b4b4]">
-                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#ff2d16]" />
+                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#d2a24c]" />
                       {pt}
                     </li>
                   ))}
@@ -81,7 +79,7 @@ export default function ServicesPage() {
 
                 <Link
                   href="/contact"
-                  className="mt-8 inline-flex items-center gap-2 text-sm text-[#ff2d16] transition-opacity hover:opacity-75"
+                  className="mt-8 inline-flex items-center gap-2 text-sm text-[#d2a24c] transition-opacity hover:opacity-75"
                 >
                   Enquire about this service <span aria-hidden>→</span>
                 </Link>

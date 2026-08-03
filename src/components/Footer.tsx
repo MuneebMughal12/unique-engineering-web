@@ -2,12 +2,20 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "motion/react";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
 import { company } from "@/data/company";
 import Marquee from "./Marquee";
 import RevealText from "./RevealText";
 
 export default function Footer() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end end"],
+  });
+  const imageY = useTransform(scrollYProgress, [0, 1], [90, -18]);
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1.08, 1]);
   const wa = `https://wa.me/${company.whatsapp}?text=${encodeURIComponent(
     company.whatsappMessage
   )}`;
@@ -15,7 +23,7 @@ export default function Footer() {
   const toTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
-    <footer className="relative min-h-[100svh] overflow-hidden border-t border-[#161616] bg-[#0a0a0a]">
+    <footer ref={ref} className="relative min-h-[100svh] overflow-hidden border-t border-[#161616] bg-[#0a0a0a]">
       <div className="glow pointer-events-none absolute inset-0" />
 
       {/* ethos line, centred */}
@@ -30,7 +38,7 @@ export default function Footer() {
         <Marquee speed={44}>
           <span className="px-6 text-[9vw] font-bold leading-none tracking-tight text-[#2a2a2a]">
             {company.email.split("@")[0]}
-            <span className="text-[#ff2d16]/70">@</span>
+            <span className="text-[#d2a24c]/70">@</span>
             {company.email.split("@")[1]}
           </span>
           <span className="px-6 text-[9vw] font-bold leading-none text-[#1f1f1f]">·</span>
@@ -39,15 +47,16 @@ export default function Footer() {
 
       {/* centred image */}
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.8 }}
-        className="relative mx-auto mt-12 h-[38svh] w-full max-w-2xl sm:mt-16"
+        style={{ y: imageY, scale: imageScale }}
+        className="relative mx-auto mt-12 h-[38svh] w-full max-w-2xl will-change-transform sm:mt-16"
       >
         <Image
-          src="/img/site-team.jpg"
-          alt="Unique Engineering site team"
+          src="/img/villa-karen.jpg"
+          alt="Bricks N Builders completed home"
           fill
           sizes="(max-width: 768px) 100vw, 42rem"
           className="object-cover object-top"
@@ -57,7 +66,13 @@ export default function Footer() {
       </motion.div>
 
       {/* bottom row */}
-      <div className="relative mx-auto -mt-10 grid max-w-[1500px] gap-10 px-5 pb-8 sm:px-8 md:grid-cols-[1fr_auto_1fr] md:items-end">
+      <motion.div
+        initial={{ opacity: 0, y: 45 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+        className="relative mx-auto -mt-10 grid max-w-[1500px] gap-10 px-5 pb-8 sm:px-8 md:grid-cols-[1fr_auto_1fr] md:items-end"
+      >
         <div>
           <p className="text-sm font-semibold text-white">Got a project in mind?</p>
           <p className="mt-2 max-w-xs text-2xl leading-tight text-[#8a8a8a] sm:text-3xl">
@@ -66,7 +81,7 @@ export default function Footer() {
           </p>
           <Link
             href="/contact"
-            className="mt-5 inline-block rounded-full bg-[#ff2d16] px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-85"
+            className="mt-5 inline-block rounded-full bg-[#d2a24c] px-6 py-3 text-sm font-medium text-[#0a0a0a] transition-opacity hover:opacity-85"
           >
             Start a conversation
           </Link>
@@ -74,21 +89,21 @@ export default function Footer() {
 
         <button
           onClick={toTop}
-          className="mx-auto inline-flex items-center gap-2 rounded-full border border-[#3a3a3a] px-6 py-3 text-sm text-[#d4d4d4] transition-colors hover:border-[#ff2d16] hover:bg-[#ff2d16] hover:text-white"
+          className="mx-auto inline-flex items-center gap-2 rounded-full border border-[#3a3a3a] px-6 py-3 text-sm text-[#d4d4d4] transition-colors hover:border-[#d2a24c] hover:bg-[#d2a24c] hover:text-[#0a0a0a]"
         >
           <span aria-hidden>↑</span> Back to top
         </button>
 
         <div className="grid grid-cols-2 gap-8 md:justify-items-end">
           <div>
-            <p className="text-sm text-[#ff2d16]">Offices</p>
+            <p className="text-sm text-[#d2a24c]">Offices</p>
             <ul className="mt-3 space-y-1 text-sm text-[#8a8a8a]">
-              <li>Sukkur, Sindh</li>
-              <li>Meerpur Mathelo, Ghotki</li>
+              <li>Rehbar Society, Chakri Road</li>
+              <li>Dhamial Road, Rawalpindi</li>
             </ul>
           </div>
           <div>
-            <p className="text-sm text-[#ff2d16]">Contact</p>
+            <p className="text-sm text-[#d2a24c]">Contact</p>
             <ul className="mt-3 space-y-1 text-sm text-[#8a8a8a]">
               <li>
                 <a href={`mailto:${company.email}`} className="transition-colors hover:text-white">
@@ -116,13 +131,13 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       <div className="relative mx-auto flex max-w-[1500px] flex-col gap-2 border-t border-[#161616] px-5 py-5 text-xs text-[#4a4a4a] sm:flex-row sm:items-center sm:justify-between sm:px-8">
         <p>
           © {new Date().getFullYear()} {company.legalName}
         </p>
-        <p>ISO 9001 · ISO 14001 · ISO 45001 · PEC No. 226</p>
+        <p>Design · Construction · Map Approval · Rawalpindi</p>
       </div>
     </footer>
   );

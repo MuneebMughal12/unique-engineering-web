@@ -9,30 +9,34 @@ export default function Preloader() {
   const pathname = usePathname();
   // Project detail pages open straight away — no loading screen.
   if (pathname.startsWith("/projects/")) return null;
-  return <Loader key={pathname} />;
+  return <Loader />;
 }
+
+let hasPlayed = false;
 
 function Loader() {
   const [pct, setPct] = useState(0);
-  const [done, setDone] = useState(false);
+  const [done, setDone] = useState(hasPlayed);
 
   useEffect(() => {
+    if (hasPlayed) return;
     // Runs on first load and again on every route change (keyed by pathname).
     document.body.style.overflow = "hidden";
     let v = 0;
     const id = setInterval(() => {
-      v += Math.random() * 4 + 2.2;
+      v += Math.random() * 7 + 4.5;
       if (v >= 100) {
         v = 100;
         clearInterval(id);
         setTimeout(() => {
+          hasPlayed = true;
           setDone(true);
           document.body.style.overflow = "";
           window.scrollTo(0, 0);
-        }, 520);
+        }, 260);
       }
       setPct(Math.floor(v));
-    }, 90);
+    }, 72);
     return () => {
       clearInterval(id);
       document.body.style.overflow = "";
@@ -45,7 +49,7 @@ function Loader() {
         <motion.div
           className="fixed inset-0 z-[10000] flex flex-col justify-end bg-[#e6e6e6] px-6 pb-8 sm:px-10 sm:pb-12"
           exit={{ y: "-100%" }}
-          transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
+          transition={{ duration: 0.72, ease: [0.76, 0, 0.24, 1] }}
         >
           {/* growing hairline */}
           <motion.div
@@ -66,7 +70,7 @@ function Loader() {
                   cx={`${58 + Math.cos(a) * 14}%`}
                   cy={`${42 + Math.sin(a) * 22}%`}
                   r={on ? 3 : 1.4}
-                  fill="#ff2d16"
+                  fill="#d2a24c"
                   opacity={on ? 0.9 : 0.25}
                   style={{ transition: "all .35s ease" }}
                 />

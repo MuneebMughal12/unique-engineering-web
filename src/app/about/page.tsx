@@ -8,7 +8,7 @@ import { company } from "@/data/company";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Unique Construction & Engineering Services — an ISO-certified EPC contractor operating from Sukkur, Sindh since 2007.",
+    "Bricks N Builders — a Rawalpindi-based design and construction company offering architectural design, map approval, construction and turnkey handover.",
 };
 
 export default function AboutPage() {
@@ -20,13 +20,13 @@ export default function AboutPage() {
         <div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
           <p className="eyebrow">About us</p>
           <h1 className="display mt-5 text-[13vw] leading-[0.9] sm:text-[8vw] lg:text-[5.2vw]">
-            <span className="lead">Engineering</span>
+            <span className="lead">We build</span>
             <span>
-              built on <span className="hot">discipline</span>
+              a <span className="hot">smile</span>
             </span>
           </h1>
           <p className="mt-8 max-w-2xl text-base leading-relaxed text-[#9a9a9a] sm:text-lg">
-            {company.tagline} · Established {company.founded} · Sukkur, Sindh
+            {company.tagline} · Design, Construction &amp; Map Approval · Rawalpindi &amp; Islamabad
           </p>
         </div>
       </section>
@@ -65,13 +65,13 @@ export default function AboutPage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent" />
             </div>
-            <div className="mt-6 border-l-2 border-[#ff2d16] pl-5">
+            <div className="mt-6 border-l-2 border-[#d2a24c] pl-5">
               <p className="text-sm leading-relaxed text-[#b4b4b4]">
                 &ldquo;A strong commitment to quality, professional approach, and
                 understanding the client&rsquo;s need has always been our priority.&rdquo;
               </p>
               <p className="mt-3 text-sm font-semibold text-white">{company.ceo.name}</p>
-              <p className="text-xs text-[#ff2d16]">{company.ceo.role}</p>
+              <p className="text-xs text-[#d2a24c]">{company.ceo.role}</p>
             </div>
           </div>
         </div>
@@ -93,7 +93,7 @@ export default function AboutPage() {
               <ul className="mt-4 space-y-3">
                 {company.mission.map((m) => (
                   <li key={m} className="flex gap-3 text-sm leading-relaxed text-[#b4b4b4]">
-                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#ff2d16]" />
+                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#d2a24c]" />
                     {m}
                   </li>
                 ))}
@@ -127,12 +127,12 @@ export default function AboutPage() {
                 className="group flex flex-col gap-1 py-5 transition-colors hover:bg-[#0f0f0f] sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:px-2"
               >
                 <div className="flex-1">
-                  <p className="text-base font-medium text-white transition-colors group-hover:text-[#ff2d16] sm:text-lg">
+                  <p className="text-base font-medium text-white transition-colors group-hover:text-[#d2a24c] sm:text-lg">
                     {c.title}
                   </p>
                   <p className="mt-0.5 text-xs text-[#6a6a6a]">Issued by {c.body}</p>
                 </div>
-                <p className="text-sm text-[#8a8a8a] transition-colors group-hover:text-[#ff2d16]">
+                <p className="text-sm text-[#8a8a8a] transition-colors group-hover:text-[#d2a24c]">
                   {c.code}
                 </p>
               </div>
@@ -145,15 +145,15 @@ export default function AboutPage() {
       <section className="border-t border-[#1f1f1f] py-20 sm:py-28">
         <div className="mx-auto grid max-w-[1400px] gap-14 px-5 sm:px-8 lg:grid-cols-2 lg:items-center">
           <div>
-            <p className="eyebrow">Our clients</p>
+            <p className="eyebrow">Where we work</p>
             <h2 className="mt-5 text-3xl font-semibold leading-tight sm:text-4xl">
-              Trusted by the operators who{" "}
-              <span className="text-[#ff2d16]">run Pakistan&rsquo;s energy sector</span>
+              Building across{" "}
+              <span className="text-[#d2a24c]">Rawalpindi &amp; Islamabad</span>
             </h2>
             <p className="mt-6 max-w-lg text-sm leading-relaxed text-[#9a9a9a] sm:text-base">
-              We work as a direct contractor and as a specialist sub-contractor to the
-              country&rsquo;s largest EPC houses — meeting their HSE, quality and schedule
-              requirements on live, operating plants.
+              From Rehbar Society and Chakri Road to DHA, Bahria Town and the wider twin
+              cities — we design, approve and build homes and commercial projects across
+              the region&rsquo;s major housing societies.
             </p>
           </div>
           <HexGrid />

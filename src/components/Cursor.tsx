@@ -67,13 +67,13 @@ export default function Cursor() {
           ref={(el) => {
             trail.current[i] = el;
           }}
-          className="absolute left-0 top-0 rounded-full bg-[#ff2d16]"
+          className="absolute left-0 top-0 rounded-full bg-[#d2a24c]"
           style={{ width: 6 - i * 0.6, height: 6 - i * 0.6 }}
         />
       ))}
       <div
         ref={dot}
-        className="absolute left-0 top-0 h-[7px] w-[7px] rounded-full bg-[#ff2d16] transition-[transform,opacity] duration-200"
+        className="absolute left-0 top-0 h-[7px] w-[7px] rounded-full bg-[#d2a24c] transition-[transform,opacity] duration-200"
       />
     </div>
   );

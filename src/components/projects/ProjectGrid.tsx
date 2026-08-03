@@ -30,7 +30,7 @@ export default function ProjectGrid() {
             onClick={() => setFilter(c)}
             className={`rounded-full border px-4 py-2 text-sm transition-colors ${
               filter === c
-                ? "border-[#ff2d16] bg-[#ff2d16] text-white"
+                ? "border-[#d2a24c] bg-[#d2a24c] text-[#0a0a0a]"
                 : "border-[#242424] text-[#8a8a8a] hover:border-[#4a4a4a] hover:text-white"
             }`}
           >
@@ -69,11 +69,11 @@ export default function ProjectGrid() {
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/10 to-transparent" />
-                    <span className="pointer-events-none absolute inset-0 border-2 border-transparent transition-colors duration-300 group-hover:border-[#ff2d16]" />
+                    <span className="pointer-events-none absolute inset-0 border-2 border-transparent transition-colors duration-300 group-hover:border-[#d2a24c]" />
                   </div>
 
                   <div className="absolute inset-x-0 bottom-0 p-5">
-                    <p className="text-xs text-[#ff2d16]">{p.category}</p>
+                    <p className="text-xs text-[#d2a24c]">{p.category}</p>
                     <h3 className="mt-1 text-base font-semibold leading-tight text-white sm:text-lg">
                       {p.title}
                     </h3>

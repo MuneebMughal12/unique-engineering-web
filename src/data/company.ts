@@ -1,82 +1,97 @@
 export const company = {
-  name: "Unique Construction & Engineering Services",
-  legalName: "Unique Construction & Engineering Services (Pvt) Limited",
-  short: "Unique Engineering",
-  abbr: "UE",
-  founded: 2007,
-  tagline: "Engineering, Procurement & Construction",
-  ceo: { name: "Ayaz Ahmed", role: "Chief Executive Officer" },
+  name: "Bricks N Builders",
+  legalName: "Bricks N Builders",
+  short: "Bricks N Builders",
+  abbr: "BNB",
+  tagline: "We Build Smile",
+  // TODO: confirm the year the company was established
+  founded: "",
+  ceo: { name: "Sohail Arif", role: "Chief Executive Officer" },
 
   intro:
-    "Established in 2007, Unique Construction & Engineering Services has followed a steady path of growth in civil construction with an efficient, time-saving and cost-effective approach. Since 2013 we have broadened our scope and now deliver Mechanical, Electrical & Instrumentation projects across the Oil and Gas sector.",
+    "Bricks N Builders is a Rawalpindi-based design and construction company. From architectural drawings and society map approvals to grey structure, finishing and turnkey handover, we take a project from the first line on paper to the day you get the keys.",
 
   ethos:
-    "We emphasise teamwork for the provision of excellent services and to achieve targeted goals on time by planning, managing and controlling all aspects of a project. Our company is equipped with a competent team of multi-disciplined professionals including engineers, supervisors and foremen, backed by the latest equipment, machinery and tools.",
+    "We keep it simple: honest costing, clear timelines and site work you can actually see progressing. Whether it is a family home, a commercial unit or getting a map approved from your housing society, our team stays with you through every stage — that is how we build a smile.",
 
   mission: [
-    "To be undisputed leaders in Mechanical, Civil and Electrical & Instrumentation projects.",
-    "Provide professional services and solutions to our clients.",
-    "Stay profitable in growth.",
+    "Deliver quality construction on time and on budget.",
+    "Make design and map approval simple for every client.",
+    "Build lasting relationships, not just buildings.",
   ],
 
   vision:
-    "A regional market leader in the provision of civil engineering, building construction and industrial EPC services.",
+    "To be Rawalpindi & Islamabad's most trusted name in home design, construction and map approval.",
 
   values:
-    "We believe in maintaining the highest standard of professionalism, integrity, creativity and positive attitude — delivery that meets and surpasses expectations, while offering prompt and lasting solutions that stand the test of time.",
+    "Honesty in costing, transparency on site, and craftsmanship that lasts — we treat every project as if we were building it for our own family.",
 
+  // NOTE: placeholder figures — replace with the client's real numbers.
   stats: [
-    { value: 18, suffix: "+", label: "Years in operation" },
-    { value: 120, suffix: "+", label: "Projects delivered" },
-    { value: 40, suffix: "+", label: "Blue-chip clients" },
-    { value: 3, suffix: "", label: "ISO certifications" },
+    { value: 50, suffix: "+", label: "Projects completed" },
+    { value: 100, suffix: "%", label: "Client satisfaction" },
+    { value: 10, suffix: "+", label: "Years of experience" },
+    { value: 2, suffix: "", label: "Office locations" },
   ],
 
+  // Real credential from the company profile — expand as the client provides more.
   certifications: [
-    { code: "ISO 9001:2015", title: "Quality Management System", body: "TÜV Austria" },
-    { code: "ISO 14001:2015", title: "Environmental Management System", body: "TÜV Austria" },
-    { code: "ISO 45001:2018", title: "Occupational Health & Safety", body: "TÜV Austria" },
-    { code: "PEC No. 226", title: "Registered Contractor", body: "Pakistan Engineering Council" },
-    { code: "0095970", title: "Company Registration", body: "SECP Pakistan" },
+    {
+      code: "Rehbar Housing Society",
+      title: "Approved Builder & Developer",
+      body: "Rehbar Housing Society, Rawalpindi",
+    },
+    {
+      code: "Map Approval",
+      title: "Society & TMA Map Approval Services",
+      body: "Rawalpindi / Islamabad",
+    },
   ],
 
   offices: [
     {
       label: "Head Office",
-      lines: ["Plot # 479, Near Queen Marry School", "By-Pass Road, Sukkur, Sindh, Pakistan"],
-      phones: ["071-5804765", "071-8504767", "0321-5644444"],
+      lines: [
+        "Plot No C-20A, Akram Plaza, Commercial Avenue",
+        "Rehbar Housing Society, Chakri Road, Rawalpindi",
+      ],
+      phones: ["0313-5350050", "0313-5350085"],
     },
     {
-      label: "Workshop",
-      lines: ["Near FFC, GT Road, Meerpur Mathelo", "Distt. Ghotki, Sindh, Pakistan"],
-      phones: ["0303-3270100", "0321-5644444"],
+      label: "Branch Office",
+      lines: [
+        "Office #1, Near Italian Pizza, Main Kalma Chowk",
+        "Dhamial Road, Rawalpindi",
+      ],
+      phones: ["0313-5350085"],
     },
   ],
 
-  email: "info@uniqueengineering.com.pk",
-  website: "www.uniqueengineering.com.pk",
-  whatsapp: "923215644444",
+  email: "bricksnbuilders1@gmail.com",
+  website: "",
+  whatsapp: "923135350050",
   whatsappMessage:
-    "Assalam o Alaikum, mujhe aap ki construction & engineering services ke baare mein maloomat chahiye.",
+    "Assalam o Alaikum, mujhe Bricks N Builders ki design, construction aur map approval services ke baare mein maloomat chahiye.",
 
   socials: [
     { label: "Facebook", href: "#" },
-    { label: "LinkedIn", href: "#" },
     { label: "Instagram", href: "#" },
+    { label: "WhatsApp", href: "https://wa.me/923135350050" },
   ],
 } as const;
 
+// NOTE: placeholder — replace with the real areas / societies the client works in.
 export const clients = [
-  "Engro Fertilizer",
-  "OMV Pakistan",
-  "United Energy",
-  "MOL Pakistan",
-  "UCH Power",
-  "PARCO",
-  "DESCON",
-  "Pakistan Army",
-  "Sindh Irrigation",
-  "KETRACO",
-  "Maurice Energy",
-  "Mari Energies",
+  "Rehbar Society",
+  "DHA",
+  "Bahria Town",
+  "Bahria Enclave",
+  "Gulraiz",
+  "PWD",
+  "Media Town",
+  "Airport Housing",
+  "Soan Gardens",
+  "Chakri Road",
+  "Dhamial Road",
+  "Islamabad",
 ] as const;

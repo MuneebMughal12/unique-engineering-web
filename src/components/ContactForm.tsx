@@ -5,12 +5,12 @@ import { motion, AnimatePresence } from "motion/react";
 import { company } from "@/data/company";
 
 const subjects = [
-  "Civil Construction",
-  "Mechanical Fabrication",
-  "Electrical & Instrumentation",
-  "Flowlines / Pipelines",
-  "Building Construction",
-  "Design & Drafting",
+  "Architectural Design",
+  "Map Approval",
+  "Grey Structure",
+  "Finishing & Turnkey",
+  "Renovation & Extension",
+  "Interior Design",
   "Other",
 ];
 
@@ -28,7 +28,7 @@ export default function ContactForm() {
   }
 
   const field =
-    "w-full rounded-sm border border-[#242424] bg-[#0f0f0f] px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-[#5a5a5a] focus:border-[#ff2d16]";
+    "w-full rounded-sm border border-[#242424] bg-[#0f0f0f] px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-[#5a5a5a] focus:border-[#d2a24c]";
 
   return (
     <AnimatePresence mode="wait">
@@ -39,17 +39,17 @@ export default function ContactForm() {
           animate={{ opacity: 1, y: 0 }}
           className="rounded-sm border border-[#242424] bg-[#0f0f0f] p-8 text-center"
         >
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#ff2d16]">
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#d2a24c]">
             <span className="text-xl">✓</span>
           </div>
           <p className="mt-5 text-lg font-semibold">Thank you — message received.</p>
           <p className="mx-auto mt-2 max-w-sm text-sm text-[#8a8a8a]">
             Our team will get back to you within one working day. For anything urgent,
-            WhatsApp us on {company.offices[0].phones[2]}.
+            WhatsApp us on {company.offices[0].phones[0]}.
           </p>
           <button
             onClick={() => setSent(false)}
-            className="mt-6 text-sm text-[#ff2d16] transition-opacity hover:opacity-75"
+            className="mt-6 text-sm text-[#d2a24c] transition-opacity hover:opacity-75"
           >
             Send another message
           </button>
@@ -129,7 +129,7 @@ export default function ContactForm() {
           <button
             type="submit"
             disabled={busy}
-            className="w-full rounded-full bg-[#ff2d16] px-6 py-3.5 text-sm font-medium transition-opacity hover:opacity-85 disabled:opacity-50 sm:w-auto"
+            className="w-full rounded-full bg-[#d2a24c] px-6 py-3.5 text-sm font-medium text-[#0a0a0a] transition-opacity hover:opacity-85 disabled:opacity-50 sm:w-auto"
           >
             {busy ? "Sending…" : "Send enquiry"}
           </button>

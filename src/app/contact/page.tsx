@@ -5,7 +5,7 @@ import { company } from "@/data/company";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with Unique Construction & Engineering Services — head office Sukkur, workshop Meerpur Mathelo, Ghotki.",
+    "Get in touch with Bricks N Builders — offices in Rehbar Housing Society (Chakri Road) and Dhamial Road, Rawalpindi.",
 };
 
 export default function ContactPage() {
@@ -50,11 +50,11 @@ export default function ContactPage() {
                   className="flex items-center justify-between rounded-sm border border-[#242424] p-4 transition-colors hover:border-[#25D366]"
                 >
                   <span className="text-sm text-white">WhatsApp</span>
-                  <span className="text-sm text-[#8a8a8a]">{company.offices[0].phones[2]}</span>
+                  <span className="text-sm text-[#8a8a8a]">{company.offices[0].phones[0]}</span>
                 </a>
                 <a
                   href={`mailto:${company.email}`}
-                  className="flex items-center justify-between rounded-sm border border-[#242424] p-4 transition-colors hover:border-[#ff2d16]"
+                  className="flex items-center justify-between rounded-sm border border-[#242424] p-4 transition-colors hover:border-[#d2a24c]"
                 >
                   <span className="text-sm text-white">Email</span>
                   <span className="text-sm text-[#8a8a8a]">{company.email}</span>
@@ -75,7 +75,7 @@ export default function ContactPage() {
                     <a
                       key={p}
                       href={`tel:${p}`}
-                      className="text-sm text-[#8a8a8a] transition-colors hover:text-[#ff2d16]"
+                      className="text-sm text-[#8a8a8a] transition-colors hover:text-[#d2a24c]"
                     >
                       {p}
                     </a>
@@ -97,8 +97,8 @@ export default function ContactPage() {
 
             <div className="relative aspect-[16/10] overflow-hidden rounded-sm border border-[#242424]">
               <iframe
-                title="Head office location — Sukkur"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=68.78%2C27.65%2C68.92%2C27.78&layer=mapnik"
+                title="Bricks N Builders — Rawalpindi"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=72.95%2C33.52%2C73.15%2C33.66&layer=mapnik"
                 className="h-full w-full grayscale"
                 loading="lazy"
               />

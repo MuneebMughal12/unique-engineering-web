@@ -7,59 +7,45 @@ export type Service = {
 
 export const services: Service[] = [
   {
-    slug: "civil-construction",
-    title: "Civil Construction",
+    slug: "architectural-design",
+    title: "Architectural Design & Drawings",
     blurb:
-      "Reinforced concrete structures, foundations, roads, drainage and site development for industrial and institutional projects.",
-    points: ["Excavation & backfill", "RCC structures", "Roads & causeways", "Boundary walls & fencing"],
+      "2D drawings and 3D elevations that turn your plot and requirements into a buildable home or commercial design — before a single brick is laid.",
+    points: ["2D floor plans", "3D front elevations", "Structural drawings", "Working drawings"],
   },
   {
-    slug: "mechanical-fabrication",
-    title: "Mechanical Fabrication & Erection",
+    slug: "map-approval",
+    title: "Map Approval",
     blurb:
-      "Shop and field fabrication of tanks, skids, pipe supports and structural steel, erected and tested to specification.",
-    points: ["Tank fabrication", "Structural steel", "Pipe supports", "Equipment erection"],
+      "We handle the paperwork and follow-up to get your building map approved from the housing society or TMA, so you can start construction without the runaround.",
+    points: ["Society approval", "TMA / RDA approval", "Documentation", "Follow-up & submission"],
   },
   {
-    slug: "electrical-instrumentation",
-    title: "Electrical & Instrumentation",
+    slug: "grey-structure",
+    title: "Grey Structure",
     blurb:
-      "LV/HT electrical works, control systems, cable trays, wellhead control panels and full instrumentation loops.",
-    points: ["LV / HT installation", "Control panels", "Cable trays & glanding", "Loop checking"],
+      "The bones of your building — excavation, foundation, RCC, brickwork and roof — built to the drawings with quality material and honest measurement.",
+    points: ["Excavation & foundation", "RCC & framing", "Brick masonry", "Roof casting"],
   },
   {
-    slug: "pipelines-flowlines",
-    title: "Cross-Country Flowlines",
+    slug: "finishing-turnkey",
+    title: "Finishing & Turnkey",
     blurb:
-      "Laying, welding, testing and commissioning of flowlines and fibre-optic cable over long cross-country routes.",
-    points: ["Pipeline laying", "Hydro testing", "Fibre-optic splicing", "Pigging & flushing"],
+      "Plaster, flooring, paint, woodwork, electrical and plumbing — everything from grey structure to a move-in-ready home handed over on a single contract.",
+    points: ["Tiling & flooring", "Paint & finishes", "Woodwork & doors", "Electrical & plumbing"],
   },
   {
-    slug: "power-substations",
-    title: "Power Substation Works",
+    slug: "renovation",
+    title: "Renovation & Extension",
     blurb:
-      "Complete civil scope for 132/33KV substations — earthworks, equipment foundations, oil pits, cable trenches and control buildings.",
-    points: ["Transformer foundations", "Oil pits & trenches", "Control buildings", "Substation roads"],
+      "Upgrading an older house or adding a floor? We remodel, extend and modernise existing structures with minimal disruption to your home.",
+    points: ["Home remodeling", "Floor addition", "Facade upgrade", "Repairs & waterproofing"],
   },
   {
-    slug: "building-construction",
-    title: "Building Construction",
+    slug: "interior-design",
+    title: "Interior Design",
     blurb:
-      "High-rise and low-rise residential, commercial and institutional buildings — from sub-structure to finishes.",
-    points: ["Residential & commercial", "Institutional buildings", "MEP coordination", "Finishing works"],
-  },
-  {
-    slug: "design-drafting",
-    title: "Design & Drafting",
-    blurb:
-      "Architectural and structural drawings, site layouts and as-built documentation produced in-house before a shovel hits the ground.",
-    points: ["Architectural drawings", "Structural design", "Site layouts", "As-built records"],
-  },
-  {
-    slug: "project-management",
-    title: "Project Management",
-    blurb:
-      "Planning, contract administration, site supervision and inspection that keeps a project on schedule and within budget.",
-    points: ["Planning & scheduling", "Contract management", "Site supervision", "QA / QC inspection"],
+      "Kitchens, wardrobes, false ceilings, feature walls and lighting — interiors designed and executed to make the finished space feel complete.",
+    points: ["Kitchen & wardrobes", "False ceiling", "Feature walls", "Lighting design"],
   },
 ];

@@ -44,11 +44,12 @@ export default function Nav() {
       >
         <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-5 py-4 sm:px-8">
           <Link href="/" className="group flex flex-col leading-none">
-            <span className="text-sm font-bold tracking-tight sm:text-base">
-              UNIQUE <span className="text-[#ff2d16]">/</span> ENGINEERING
+            <span className="text-sm font-bold uppercase tracking-tight sm:text-base">
+              <span className="gold-text">Bricks</span> N{" "}
+              <span className="gold-text">Builders</span>
             </span>
             <span className="mt-1 hidden text-[10px] tracking-[0.18em] text-[#8a8a8a] sm:block">
-              EPC &amp; CONSTRUCTION · SINCE {company.founded}
+              DESIGN · CONSTRUCTION · MAP APPROVAL
             </span>
           </Link>
 
@@ -68,7 +69,7 @@ export default function Nav() {
                   {active && (
                     <motion.span
                       layoutId="nav-dot"
-                      className="absolute -bottom-1.5 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-[#ff2d16]"
+                      className="absolute -bottom-1.5 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-[#d2a24c]"
                     />
                   )}
                 </Link>
@@ -78,14 +79,14 @@ export default function Nav() {
 
           <div className="flex items-center gap-3">
             <a
-              href={`tel:${company.offices[0].phones[2]}`}
+              href={`tel:${company.offices[0].phones[0]}`}
               className="hidden text-sm text-[#8a8a8a] transition-colors hover:text-white md:block"
             >
-              {company.offices[0].phones[2]}
+              {company.offices[0].phones[0]}
             </a>
             <Link
               href="/contact"
-              className="hidden rounded-full border border-[#ff2d16] px-4 py-2 text-sm text-[#ff2d16] transition-colors hover:bg-[#ff2d16] hover:text-white sm:block"
+              className="hidden rounded-full border border-[#d2a24c] px-4 py-2 text-sm text-[#d2a24c] transition-colors hover:bg-[#d2a24c] hover:text-[#0a0a0a] sm:block"
             >
               Get a Quote
             </Link>

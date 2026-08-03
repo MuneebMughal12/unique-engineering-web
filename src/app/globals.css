@@ -6,8 +6,9 @@
   --color-line: #1f1f1f;
   --color-muted: #8a8a8a;
   --color-dim: #4a4a4a;
-  --color-accent: #ff2d16;
-  --color-accent-soft: #ff5c47;
+  --color-accent: #d2a24c;
+  --color-accent-soft: #e8ce93;
+  --color-accent-deep: #7a5626;
 
   --font-display: var(--font-jamjuree), system-ui, sans-serif;
 }
@@ -37,8 +38,8 @@ body {
 }
 
 ::selection {
-  background: #ff2d16;
-  color: #fff;
+  background: #d2a24c;
+  color: #0a0a0a;
 }
 
 ::-webkit-scrollbar {
@@ -52,7 +53,7 @@ body {
   border-radius: 99px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #ff2d16;
+  background: #d2a24c;
 }
 
 /* ---- Display headings: staggered indent, one word in accent ---- */
@@ -67,7 +68,11 @@ body {
   color: #fff;
 }
 .display .hot {
-  color: #ff2d16;
+  /* metallic gold gradient, like the logo */
+  background: linear-gradient(180deg, #f0dca6 0%, #d2a24c 48%, #8a6224 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 .display > span {
   display: block;
@@ -79,6 +84,14 @@ body {
   padding-left: 0.2em;
 }
 
+/* reusable gold gradient text (brand wordmark, accents) */
+.gold-text {
+  background: linear-gradient(180deg, #f0dca6 0%, #d2a24c 50%, #9a6e2c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 .eyebrow {
   font-size: 0.7rem;
   letter-spacing: 0.2em;
@@ -88,8 +101,8 @@ body {
 
 .glow {
   background:
-    radial-gradient(60% 60% at 50% 40%, rgba(255, 45, 22, 0.13), transparent 70%),
-    radial-gradient(40% 40% at 85% 85%, rgba(255, 45, 22, 0.07), transparent 70%);
+    radial-gradient(60% 60% at 50% 40%, rgba(210, 162, 76, 0.12), transparent 70%),
+    radial-gradient(40% 40% at 85% 85%, rgba(210, 162, 76, 0.06), transparent 70%);
 }
 
 @media (prefers-reduced-motion: reduce) {

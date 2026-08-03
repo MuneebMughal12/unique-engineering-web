@@ -17,22 +17,22 @@ const jamjuree = Bai_Jamjuree({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://uniqueengineering.com.pk"),
+  metadataBase: new URL("https://bricksnbuilders.example"),
   title: {
-    default: `${company.name} | EPC & Construction Contractors`,
+    default: `${company.name} | Design, Construction & Map Approval`,
     template: `%s | ${company.short}`,
   },
   description: company.intro.slice(0, 158),
   keywords: [
-    "construction company Pakistan",
-    "EPC contractor Sukkur",
-    "oil and gas construction",
-    "civil construction",
-    "mechanical fabrication",
-    "power substation civil works",
+    "construction company Rawalpindi",
+    "house construction Islamabad",
+    "map approval Rawalpindi",
+    "home design and construction",
+    "grey structure and finishing",
+    "builders in Rawalpindi",
   ],
   openGraph: {
-    title: `${company.name} | EPC & Construction Contractors`,
+    title: `${company.name} | Design, Construction & Map Approval`,
     description: company.intro.slice(0, 158),
     type: "website",
   },

@@ -61,7 +61,7 @@ export default function ProjectShowcase() {
             <div className="grid gap-5 lg:grid-cols-[92px_1fr_300px] lg:gap-8">
               {/* ---- left rail: active thumbnail + counter ---- */}
               <div className="order-2 flex items-center gap-4 lg:order-1 lg:h-[54svh] lg:flex-col lg:items-stretch lg:justify-start lg:gap-0">
-                <div className="relative h-14 w-20 shrink-0 overflow-hidden rounded-sm border-2 border-[#ff2d16] lg:h-20 lg:w-full">
+                <div className="relative h-14 w-20 shrink-0 overflow-hidden rounded-sm border-2 border-[#d2a24c] lg:h-20 lg:w-full">
                   {featured.map((f, idx) => (
                     <motion.div
                       key={f.slug}
@@ -82,7 +82,7 @@ export default function ProjectShowcase() {
                     <span
                       key={f.slug}
                       className={`block h-[2px] flex-1 transition-colors duration-300 lg:h-[2px] lg:w-full lg:flex-none ${
-                        idx === i ? "bg-[#ff2d16]" : "bg-[#2a2a2a]"
+                        idx === i ? "bg-[#d2a24c]" : "bg-[#2a2a2a]"
                       }`}
                     />
                   ))}
@@ -90,14 +90,14 @@ export default function ProjectShowcase() {
 
                 <div className="shrink-0 lg:mt-auto lg:pt-8">
                   <p className="text-sm">
-                    <span className="text-lg font-bold text-[#ff2d16]">
+                    <span className="text-lg font-bold text-[#d2a24c]">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span className="text-[#5a5a5a]">/{String(COUNT).padStart(2, "0")}</span>
                   </p>
                   <Link
                     href="/projects"
-                    className="mt-1 hidden whitespace-nowrap border-b border-[#4a4a4a] pb-0.5 text-xs text-[#c4c4c4] transition-colors hover:border-[#ff2d16] hover:text-white lg:inline-block"
+                    className="mt-1 hidden whitespace-nowrap border-b border-[#4a4a4a] pb-0.5 text-xs text-[#c4c4c4] transition-colors hover:border-[#d2a24c] hover:text-white lg:inline-block"
                   >
                     View All Projects
                   </Link>
@@ -108,29 +108,41 @@ export default function ProjectShowcase() {
               <div className="order-1 lg:order-2">
                 <div className="relative h-[30svh] overflow-hidden rounded-sm bg-[#111] sm:h-[38svh] lg:h-[54svh]">
                   {/* every image stays mounted — we only cross-fade the active one */}
-                  {featured.map((f, idx) => (
+                  <AnimatePresence initial={false} mode="popLayout">
                     <motion.div
-                      key={f.slug}
-                      aria-hidden={idx !== i}
-                      initial={false}
-                      animate={{
-                        opacity: idx === i ? 1 : 0,
-                        scale: idx === i ? 1 : 1.06,
-                        x: idx === i ? 0 : dir * 36,
+                      key={p.slug}
+                      initial={{
+                        opacity: 0.3,
+                        scale: 1.09,
+                        x: dir * 70,
+                        clipPath: dir > 0 ? "inset(0 0 0 100%)" : "inset(0 100% 0 0)",
                       }}
-                      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                      animate={{ opacity: 1, scale: 1, x: 0, clipPath: "inset(0 0% 0 0%)" }}
+                      exit={{
+                        opacity: 0,
+                        scale: 0.98,
+                        x: dir * -45,
+                        clipPath: dir > 0 ? "inset(0 100% 0 0)" : "inset(0 0 0 100%)",
+                      }}
+                      transition={{ duration: 0.78, ease: [0.16, 1, 0.3, 1] }}
                       className="absolute inset-0"
                     >
                       <Image
-                        src={f.cover}
-                        alt={idx === i ? f.title : ""}
+                        src={p.cover}
+                        alt={p.title}
                         fill
                         loading="eager"
                         sizes="(max-width: 1024px) 100vw, 900px"
                         className="object-cover"
                       />
+                      <motion.span
+                        initial={{ x: dir > 0 ? "-120%" : "120%" }}
+                        animate={{ x: dir > 0 ? "120%" : "-120%" }}
+                        transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
+                        className="absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-[#d2a24c]/30 to-transparent mix-blend-screen"
+                      />
                     </motion.div>
-                  ))}
+                  </AnimatePresence>
                 </div>
               </div>
 
@@ -138,16 +150,16 @@ export default function ProjectShowcase() {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={p.slug + "-i"}
-                  initial={{ opacity: 0, y: 18 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -12 }}
-                  transition={{ duration: 0.45 }}
+                  initial={{ opacity: 0, x: 28, y: 18 }}
+                  animate={{ opacity: 1, x: 0, y: 0 }}
+                  exit={{ opacity: 0, x: -18, y: -12 }}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                   className="order-3 space-y-3 lg:space-y-4"
                 >
                   <div>
                     <p className="text-sm text-[#8a8a8a]">Worked For</p>
                     <p className="mt-1.5 text-sm font-semibold text-white">{p.client}</p>
-                    <p className="text-sm text-[#ff2d16]">{p.year}</p>
+                    <p className="text-sm text-[#d2a24c]">{p.year}</p>
                   </div>
 
                   <div className="h-px bg-[#2a2a2a]" />
@@ -182,10 +194,10 @@ export default function ProjectShowcase() {
               <AnimatePresence mode="wait">
                 <motion.h2
                   key={p.slug + "-t"}
-                  initial={{ opacity: 0, y: 22 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -14 }}
-                  transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                  initial={{ opacity: 0, y: 38, clipPath: "inset(100% 0 0 0)" }}
+                  animate={{ opacity: 1, y: 0, clipPath: "inset(0% 0 0 0)" }}
+                  exit={{ opacity: 0, y: -22, clipPath: "inset(0 0 100% 0)" }}
+                  transition={{ duration: 0.62, ease: [0.16, 1, 0.3, 1] }}
                   className="line-clamp-2 text-2xl font-semibold leading-[1.05] tracking-tight sm:text-4xl lg:text-[3.2rem]"
                 >
                   {p.title}
@@ -194,7 +206,7 @@ export default function ProjectShowcase() {
 
               <Link
                 href="/projects"
-                className="mt-4 inline-block border-b border-[#4a4a4a] pb-0.5 text-sm text-[#c4c4c4] transition-colors hover:border-[#ff2d16] hover:text-white lg:hidden"
+                className="mt-4 inline-block border-b border-[#4a4a4a] pb-0.5 text-sm text-[#c4c4c4] transition-colors hover:border-[#d2a24c] hover:text-white lg:hidden"
               >
                 View All Projects
               </Link>

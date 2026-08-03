@@ -1,8 +1,8 @@
 /**
- * DEMO CONTENT — placeholder testimonials for the client presentation.
- * These are not real quotes and are deliberately not attributed to any
- * named individual or company. Replace with signed, approved client
- * testimonials before this site goes live.
+ * ⚠️ DEMO CONTENT — placeholder testimonials for review only.
+ * These are NOT real client quotes. They are generic and unattributed on
+ * purpose. Replace with real, approved client testimonials before launch,
+ * or remove the section until real ones are available.
  */
 export type Testimonial = {
   name: string;
@@ -13,24 +13,24 @@ export type Testimonial = {
 
 export const testimonials: Testimonial[] = [
   {
-    name: "Project Manager",
-    role: "Construction Manager",
-    org: "Oil & Gas Operator",
+    name: "Home Owner",
+    role: "Residential Client",
+    org: "Bahria Town",
     quote:
-      "The team mobilised inside a week and worked to our permit system without a single lost-time incident. Wellhead tie-in was handed back ahead of the shutdown window, which is not something we say often.",
+      "They handled everything from the map approval to the finished house. Costing was clear from day one and the site work actually moved on schedule — we got the keys without any nasty surprises.",
   },
   {
-    name: "Site Engineer",
-    role: "Civil Works Lead",
-    org: "Fertilizer Plant",
+    name: "Plot Owner",
+    role: "Design & Map Client",
+    org: "Rehbar Society",
     quote:
-      "Prefabrication quality was consistent and the piping erection on the live rack was planned properly. Their supervisors understood the drawings and raised clashes before they became rework.",
+      "Getting the map approved from the society used to feel impossible. Bricks N Builders prepared the drawings, handled the submission and followed up until it was approved. Very easy to deal with.",
   },
   {
-    name: "Procurement Head",
-    role: "Contracts & Procurement",
-    org: "Power Producer",
+    name: "Investor",
+    role: "Commercial Client",
+    org: "Chakri Road",
     quote:
-      "Documentation, QA/QC records and HSE reporting were all in order at every milestone. Invoicing matched the measured work — the commercial side was as clean as the site side.",
+      "The plaza was delivered close to the timeline we agreed and the finish quality was better than I expected for the budget. Honest people — I have already recommended them to family.",
   },
 ];

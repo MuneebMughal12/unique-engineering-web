@@ -76,7 +76,7 @@ export default function ProjectDetail({
             <div className="grid gap-5 lg:grid-cols-[92px_1fr_300px] lg:gap-8">
               {/* left rail */}
               <div className="order-2 flex items-center gap-4 lg:order-1 lg:flex-col lg:items-stretch lg:justify-start lg:gap-0">
-                <div className="relative h-14 w-20 shrink-0 overflow-hidden rounded-sm border-2 border-[#ff2d16] lg:h-20 lg:w-full">
+                <div className="relative h-14 w-20 shrink-0 overflow-hidden rounded-sm border-2 border-[#d2a24c] lg:h-20 lg:w-full">
                   {project.images.map((src, idx) => (
                     <motion.div
                       key={src + idx + "-th"}
@@ -96,14 +96,14 @@ export default function ProjectDetail({
                     <span
                       key={s + idx}
                       className={`block h-[2px] flex-1 transition-colors duration-300 lg:w-full lg:flex-none ${
-                        idx === active ? "bg-[#ff2d16]" : "bg-[#2a2a2a]"
+                        idx === active ? "bg-[#d2a24c]" : "bg-[#2a2a2a]"
                       }`}
                     />
                   ))}
                 </div>
 
                 <p className="shrink-0 text-sm lg:mt-6">
-                  <span className="text-lg font-bold text-[#ff2d16]">
+                  <span className="text-lg font-bold text-[#d2a24c]">
                     {String(active + 1).padStart(2, "0")}
                   </span>
                   <span className="text-[#5a5a5a]">/{String(shots).padStart(2, "0")}</span>
@@ -144,7 +144,7 @@ export default function ProjectDetail({
                 <div>
                   <p className="text-sm text-[#8a8a8a]">Worked For</p>
                   <p className="mt-1.5 text-sm font-semibold text-white">{project.client}</p>
-                  <p className="text-sm text-[#ff2d16]">{project.year}</p>
+                  <p className="text-sm text-[#d2a24c]">{project.year}</p>
                 </div>
 
                 {project.contractor && (
@@ -191,13 +191,13 @@ export default function ProjectDetail({
               <div className="flex gap-2 lg:flex-col">
                 <Link
                   href={`/projects/${prev.slug}`}
-                  className="inline-flex items-center gap-2 rounded-full border border-[#3a3a3a] bg-[#0a0a0a]/50 px-4 py-2 text-xs text-[#d4d4d4] backdrop-blur transition-colors hover:border-[#ff2d16] hover:bg-[#ff2d16] hover:text-white"
+                  className="inline-flex items-center gap-2 rounded-full border border-[#3a3a3a] bg-[#0a0a0a]/50 px-4 py-2 text-xs text-[#d4d4d4] backdrop-blur transition-colors hover:border-[#d2a24c] hover:bg-[#d2a24c] hover:text-[#0a0a0a]"
                 >
                   <span aria-hidden>‹</span> Previous
                 </Link>
                 <Link
                   href={`/projects/${next.slug}`}
-                  className="inline-flex items-center gap-2 rounded-full border border-[#3a3a3a] bg-[#0a0a0a]/50 px-4 py-2 text-xs text-[#d4d4d4] backdrop-blur transition-colors hover:border-[#ff2d16] hover:bg-[#ff2d16] hover:text-white"
+                  className="inline-flex items-center gap-2 rounded-full border border-[#3a3a3a] bg-[#0a0a0a]/50 px-4 py-2 text-xs text-[#d4d4d4] backdrop-blur transition-colors hover:border-[#d2a24c] hover:bg-[#d2a24c] hover:text-[#0a0a0a]"
                 >
                   Next <span aria-hidden>›</span>
                 </Link>
@@ -227,7 +227,7 @@ export default function ProjectDetail({
                     transition={{ delay: i * 0.05 }}
                     className="flex gap-3 text-sm leading-relaxed text-[#b4b4b4] sm:text-base"
                   >
-                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#ff2d16]" />
+                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#d2a24c]" />
                     {s}
                   </motion.li>
                 ))}
@@ -245,7 +245,7 @@ export default function ProjectDetail({
               </div>
               <Link
                 href="/contact"
-                className="inline-block rounded-full bg-[#ff2d16] px-5 py-2.5 text-sm transition-opacity hover:opacity-85"
+                className="inline-block rounded-full bg-[#d2a24c] px-5 py-2.5 text-sm text-[#0a0a0a] transition-opacity hover:opacity-85"
               >
                 Discuss a similar project
               </Link>

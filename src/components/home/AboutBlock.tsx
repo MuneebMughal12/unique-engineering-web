@@ -2,19 +2,29 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "motion/react";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
 import RevealText from "../RevealText";
 import HexGrid from "../HexGrid";
 import Counter from "../Counter";
 import { company } from "@/data/company";
 
 export default function AboutBlock() {
+  const imageRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: imageRef,
+    offset: ["start end", "end start"],
+  });
+  const imageY = useTransform(scrollYProgress, [0, 1], [-34, 34]);
+  const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1.02, 1.1]);
+  const lineScale = useTransform(scrollYProgress, [0.1, 0.75], [0, 1]);
+
   return (
     <section className="relative overflow-hidden py-24 sm:py-32">
       <div className="glow pointer-events-none absolute inset-0 opacity-70" />
 
       <div className="relative mx-auto grid max-w-[1400px] gap-14 px-5 sm:px-8 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
-        <div>
+        <div className="lg:sticky lg:top-28 lg:self-start">
           <p className="eyebrow">About us</p>
 
           <RevealText className="mt-6 text-xl font-medium leading-snug sm:text-2xl lg:text-[1.7rem]">
@@ -38,7 +48,7 @@ export default function AboutBlock() {
 
           <Link
             href="/about"
-            className="mt-10 inline-flex items-center gap-2 text-sm text-[#ff2d16] transition-opacity hover:opacity-75"
+            className="mt-10 inline-flex items-center gap-2 text-sm text-[#d2a24c] transition-opacity hover:opacity-75"
           >
             More about the company
             <span aria-hidden>→</span>
@@ -46,24 +56,31 @@ export default function AboutBlock() {
         </div>
 
         <div className="lg:pt-6">
-          <p className="eyebrow mb-6">Clients we&rsquo;ve delivered for</p>
+          <p className="eyebrow mb-6">Societies &amp; areas we work in</p>
           <HexGrid />
 
           <motion.div
+            ref={imageRef}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="relative mt-20 aspect-[4/3] overflow-hidden rounded-sm sm:mt-24"
           >
-            <Image
-              src="/img/site-team.jpg"
-              alt="Site team briefing before shift"
-              fill
-              sizes="(max-width: 1024px) 100vw, 40vw"
-              className="object-cover grayscale transition-all duration-700 hover:grayscale-0"
-            />
+            <motion.div style={{ y: imageY, scale: imageScale }} className="absolute -inset-[8%] will-change-transform">
+              <Image
+                src="/img/site-team.jpg"
+                alt="Site team briefing before shift"
+                fill
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                className="object-cover grayscale transition-all duration-700 hover:grayscale-0"
+              />
+            </motion.div>
             <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
+            <motion.span
+              style={{ scaleY: lineScale }}
+              className="absolute bottom-0 left-0 top-0 w-px origin-top bg-[#d2a24c]"
+            />
           </motion.div>
         </div>
       </div>
