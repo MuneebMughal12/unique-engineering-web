@@ -1,12 +1,7 @@
 import type { Metadata } from "next";
 import { Bai_Jamjuree } from "next/font/google";
 import "./globals.css";
-import Nav from "@/components/Nav";
-import Footer from "@/components/Footer";
-import Cursor from "@/components/Cursor";
-import Preloader from "@/components/Preloader";
-import SmoothScroll from "@/components/SmoothScroll";
-import WhatsAppButton from "@/components/WhatsAppButton";
+import SiteShell from "@/components/SiteShell";
 import { company } from "@/data/company";
 
 const jamjuree = Bai_Jamjuree({
@@ -46,13 +41,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${jamjuree.variable} antialiased`}>
       <body>
-        <Preloader />
-        <SmoothScroll />
-        <Cursor />
-        <Nav />
-        <main>{children}</main>
-        <Footer />
-        <WhatsAppButton />
+        <SiteShell>{children}</SiteShell>
       </body>
     </html>
   );

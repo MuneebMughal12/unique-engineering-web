@@ -4,9 +4,10 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
-import { projects, categories, type Category } from "@/data/projects";
+import { CATEGORIES, type Category, type Project } from "@/lib/models";
 
-export default function ProjectGrid() {
+export default function ProjectGrid({ projects }: { projects: Project[] }) {
+  const categories = CATEGORIES;
   const [filter, setFilter] = useState<Category | "All">("All");
   const [hover, setHover] = useState<number | null>(null);
   const [pos, setPos] = useState({ x: 0, y: 0 });
@@ -71,6 +72,12 @@ export default function ProjectGrid() {
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/10 to-transparent" />
                     <span className="pointer-events-none absolute inset-0 border-2 border-transparent transition-colors duration-300 group-hover:border-[#d2a24c]" />
                   </div>
+
+                  {p.status === "ongoing" && (
+                    <span className="absolute left-3 top-3 rounded-full bg-[#d2a24c] px-2.5 py-1 text-[11px] font-medium text-[#0a0a0a]">
+                      ● Live · Ongoing
+                    </span>
+                  )}
 
                   <div className="absolute inset-x-0 bottom-0 p-5">
                     <p className="text-xs text-[#d2a24c]">{p.category}</p>

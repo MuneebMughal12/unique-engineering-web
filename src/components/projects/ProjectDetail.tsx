@@ -4,7 +4,8 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useMotionValueEvent } from "motion/react";
-import type { Project } from "@/data/projects";
+import type { Project } from "@/lib/models";
+import ProgressTracker from "./ProgressTracker";
 
 export default function ProjectDetail({
   project,
@@ -253,6 +254,11 @@ export default function ProjectDetail({
           </div>
         </div>
       </section>
+
+      {/* live progress tracker for ongoing projects */}
+      {project.status === "ongoing" && project.phases.length > 0 && (
+        <ProgressTracker phases={project.phases} />
+      )}
     </div>
   );
 }

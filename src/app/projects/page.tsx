@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import ProjectGrid from "@/components/projects/ProjectGrid";
+import { getProjects } from "@/lib/projects-repo";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -7,7 +10,8 @@ export const metadata: Metadata = {
     "Homes, commercial projects and map approvals designed and built by Bricks N Builders across Rawalpindi and Islamabad.",
 };
 
-export default function ProjectsPage() {
+export default async function ProjectsPage() {
+  const projects = await getProjects();
   return (
     <section className="relative pb-28 pt-32 sm:pt-40">
       <div className="glow pointer-events-none absolute inset-x-0 top-0 h-[60vh]" />
@@ -28,7 +32,7 @@ export default function ProjectsPage() {
         </p>
 
         <div className="mt-16">
-          <ProjectGrid />
+          <ProjectGrid projects={projects} />
         </div>
       </div>
     </section>
