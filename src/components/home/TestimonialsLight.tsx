@@ -14,36 +14,37 @@ export default function TestimonialsLight() {
         </div>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          {testimonials.map((t, i) => (
-            <motion.div
-              key={t.quote}
+          {testimonials.map((testimonial, index) => (
+            <motion.article
+              key={testimonial.quote}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.45, delay: (i % 3) * 0.08 }}
+              transition={{ duration: 0.45, delay: (index % 3) * 0.08 }}
               className="card-shadow rounded-xl border border-[#eef0f3] bg-white p-6"
             >
-              <div className="flex gap-1 text-[#c9a14a]">
-                {"★★★★★".split("").map((s, j) => (
-                  <span key={j}>{s}</span>
+              <div className="flex gap-1 text-[#c9a14a]" aria-label="Five star rating">
+                {"★★★★★".split("").map((star, starIndex) => (
+                  <span key={starIndex}>{star}</span>
                 ))}
               </div>
-              <p className="mt-4 text-sm leading-relaxed text-[#444b54]">&ldquo;{t.quote}&rdquo;</p>
+              <p className="mt-4 text-sm leading-relaxed text-[#444b54]">
+                &ldquo;{testimonial.quote}&rdquo;
+              </p>
               <div className="mt-5 flex items-center gap-3 border-t border-[#eef0f3] pt-5">
                 <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#c9a14a]/10 text-sm font-bold text-[#c9a14a]">
-                  {t.org.charAt(0)}
+                  {testimonial.org.charAt(0)}
                 </span>
                 <div>
-                  <p className="text-sm font-bold text-[#14181f]">{t.name}</p>
-                  <p className="text-xs text-[#8a929c]">{t.role} · {t.org}</p>
+                  <p className="text-sm font-bold text-[#14181f]">{testimonial.name}</p>
+                  <p className="text-xs text-[#8a929c]">
+                    {testimonial.role} · {testimonial.org}
+                  </p>
                 </div>
               </div>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
-        <p className="mt-6 text-center text-xs text-[#b0b6bd]">
-          Demo build — placeholder reviews, to be replaced with real client testimonials.
-        </p>
       </div>
     </section>
   );

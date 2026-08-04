@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
@@ -44,18 +45,8 @@ export default function Nav() {
         }`}
       >
         <div className="mx-auto flex max-w-[1300px] items-center justify-between gap-4 px-5 py-3.5 sm:px-8">
-          <Link href="/" className="flex items-center gap-2.5">
-            <span className="flex h-9 w-9 items-center justify-center rounded-md bg-gradient-to-br from-[#c9a14a] to-[#a07d2c] text-sm font-extrabold text-white">
-              B
-            </span>
-            <span className="flex flex-col leading-none">
-              <span className="text-[15px] font-extrabold uppercase tracking-tight text-[#14181f]">
-                Bricks <span className="text-[#c9a14a]">N</span> Builders
-              </span>
-              <span className="mt-0.5 text-[9px] font-medium tracking-[0.16em] text-[#8a929c]">
-                {company.tagline.toUpperCase()}
-              </span>
-            </span>
+          <Link href="/" className="relative h-[62px] w-[66px] shrink-0 overflow-hidden rounded-sm bg-[#242321] sm:h-[68px] sm:w-[72px]" aria-label="Bricks N Builders home">
+            <Image src="/img/bricks-n-builders-logo.jpeg" alt="Bricks N Builders" fill sizes="72px" priority className="object-contain" />
           </Link>
 
           {/* desktop */}

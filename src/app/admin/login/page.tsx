@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function AdminLogin() {
   const router = useRouter();
@@ -36,9 +37,9 @@ export default function AdminLogin() {
     <div className="flex min-h-screen items-center justify-center px-5">
       <div className="w-full max-w-sm">
         <div className="mb-8 text-center">
-          <p className="text-lg font-bold uppercase tracking-tight">
-            <span className="gold-text">Bricks</span> N <span className="gold-text">Builders</span>
-          </p>
+          <div className="relative mx-auto h-36 w-36 overflow-hidden rounded-sm bg-[#242321]">
+            <Image src="/img/bricks-n-builders-logo.jpeg" alt="Bricks N Builders" fill sizes="144px" priority className="object-contain" />
+          </div>
           <p className="mt-1 text-xs tracking-[0.2em] text-[#8a8a8a]">ADMIN PANEL</p>
         </div>
 

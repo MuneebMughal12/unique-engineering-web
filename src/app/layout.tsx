@@ -31,6 +31,10 @@ export const metadata: Metadata = {
     description: company.intro.slice(0, 158),
     type: "website",
   },
+  icons: {
+    icon: "/img/bricks-n-builders-logo.jpeg",
+    apple: "/img/bricks-n-builders-logo.jpeg",
+  },
 };
 
 export default function RootLayout({

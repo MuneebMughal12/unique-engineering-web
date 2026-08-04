@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { company } from "@/data/company";
 import { services } from "@/data/services";
 
@@ -7,38 +8,43 @@ export default function Footer() {
 
   return (
     <footer className="bg-[#14181f] text-[#c3c8d0]">
-      {/* CTA strip */}
-      <div className="border-b border-white/10">
-        <div className="mx-auto flex max-w-[1300px] flex-col items-start justify-between gap-6 px-5 py-12 sm:px-8 md:flex-row md:items-center">
-          <div>
-            <p className="text-2xl font-extrabold text-white sm:text-3xl">
-              Ready to build your next project?
+      {/* CTA banner */}
+      <Link
+        href="/contact"
+        aria-label="Get a construction consultation"
+        className="group relative isolate block min-h-[390px] overflow-hidden border-b border-white/10"
+      >
+        <Image
+          src="/img/villa-karen.jpg"
+          alt="Bricks N Builders completed construction project"
+          fill
+          sizes="100vw"
+          className="-z-20 object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+        />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(46,19,15,.82),rgba(24,3,4,.93))]" />
+        <div className="mx-auto flex min-h-[390px] max-w-[1300px] items-center justify-center px-5 py-16 text-center sm:px-8">
+          <div className="max-w-4xl">
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#c9a14a]">Get Started</p>
+            <p className="mt-5 text-3xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+              Ready to Build Your Next Project?
             </p>
-            <p className="mt-2 max-w-xl text-sm text-[#8a929c]">
-              Partner with Rawalpindi&rsquo;s trusted construction team for transparent budgeting,
-              quality material and on-time delivery.
+            <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-white/80 sm:text-base">
+              Partner with Islamabad and Rawalpindi&rsquo;s trusted construction team for premium
+              material sourcing, transparent budgeting, and engineering excellence delivered on time.
             </p>
+            <span className="mt-7 inline-block rounded-sm bg-[#31589a] px-7 py-3.5 text-sm font-semibold text-white transition-colors group-hover:bg-[#c9a14a]">
+              Get Consultation
+            </span>
           </div>
-          <Link
-            href="/contact"
-            className="shrink-0 rounded-full bg-[#c9a14a] px-7 py-3.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-          >
-            Get Consultation
-          </Link>
         </div>
-      </div>
+      </Link>
 
       {/* columns */}
       <div className="mx-auto grid max-w-[1300px] gap-10 px-5 py-14 sm:px-8 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
         <div>
-          <div className="flex items-center gap-2.5">
-            <span className="flex h-9 w-9 items-center justify-center rounded-md bg-gradient-to-br from-[#c9a14a] to-[#a07d2c] text-sm font-extrabold text-white">
-              B
-            </span>
-            <span className="text-[15px] font-extrabold uppercase tracking-tight text-white">
-              Bricks <span className="text-[#c9a14a]">N</span> Builders
-            </span>
-          </div>
+          <Link href="/" className="relative block h-[120px] w-[126px] overflow-hidden rounded-sm bg-[#242321]" aria-label="Bricks N Builders home">
+            <Image src="/img/bricks-n-builders-logo.jpeg" alt="Bricks N Builders" fill sizes="126px" className="object-contain" />
+          </Link>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-[#8a929c]">
             A Rawalpindi-based design and construction company delivering homes and commercial
             projects from first drawing to final handover.
