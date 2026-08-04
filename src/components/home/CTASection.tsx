@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
+import { useState } from "react";
 import { motion } from "motion/react";
 
 const points = [
@@ -12,9 +11,24 @@ const points = [
 ];
 
 export default function CTASection() {
+  const [sent, setSent] = useState(false);
+  const [busy, setBusy] = useState(false);
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setBusy(true);
+    await new Promise((r) => setTimeout(r, 700));
+    setBusy(false);
+    setSent(true);
+  }
+
+  const field =
+    "w-full rounded-lg border border-white/15 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-[#8a929c] focus:border-[#c9a14a]";
+
   return (
-    <section className="bg-[#14181f] py-20 text-white sm:py-24">
-      <div className="mx-auto grid max-w-[1300px] items-center gap-12 px-5 sm:px-8 lg:grid-cols-2">
+    <section className="relative overflow-hidden bg-[#14181f] py-20 text-white sm:py-24">
+      <div className="pointer-events-none absolute -right-20 top-10 h-72 w-72 rounded-full bg-[#c9a14a]/10 blur-3xl" />
+      <div className="relative mx-auto grid max-w-[1300px] items-start gap-12 px-5 sm:px-8 lg:grid-cols-2">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#c9a14a]">Call To Action</p>
           <h2 className="mt-3 text-3xl font-extrabold leading-tight sm:text-4xl">
@@ -24,7 +38,6 @@ export default function CTASection() {
             Tell us about your project and our team will provide a tailored construction solution
             and a clear, comprehensive cost estimate.
           </p>
-
           <ul className="mt-8 space-y-3">
             {points.map((p, i) => (
               <motion.li
@@ -40,15 +53,31 @@ export default function CTASection() {
               </motion.li>
             ))}
           </ul>
-
-          <Link href="/contact" className="mt-9 inline-block rounded-full bg-[#c9a14a] px-7 py-3.5 text-sm font-semibold text-white transition-opacity hover:opacity-90">
-            Get Started
-          </Link>
         </div>
 
-        <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
-          <Image src="/img/institutional-building.jpg" alt="Bricks N Builders project" fill sizes="(max-width:1024px) 100vw, 45vw" className="object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#14181f]/60 to-transparent" />
+        {/* form */}
+        <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
+          {sent ? (
+            <div className="py-10 text-center">
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#c9a14a] text-xl">✓</div>
+              <p className="mt-4 text-lg font-bold">Thank you — message received.</p>
+              <p className="mt-1 text-sm text-[#a6adb7]">Our team will get back to you shortly.</p>
+            </div>
+          ) : (
+            <form onSubmit={onSubmit} className="space-y-4">
+              <div className="grid gap-4 sm:grid-cols-2">
+                <input required className={field} placeholder="Full name" />
+                <input className={field} placeholder="Phone" />
+              </div>
+              <input type="email" required className={field} placeholder="Email address" />
+              <input className={field} placeholder="Service you want" />
+              <textarea rows={3} className={`${field} resize-none`} placeholder="Comments / questions" />
+              <button type="submit" disabled={busy} className="w-full rounded-full bg-[#c9a14a] px-6 py-3.5 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-50">
+                {busy ? "Sending…" : "Send Message"}
+              </button>
+              <p className="text-xs text-[#6a727e]">Demo build — not yet delivered by email.</p>
+            </form>
+          )}
         </div>
       </div>
     </section>

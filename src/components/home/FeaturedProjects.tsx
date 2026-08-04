@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
 import { CATEGORIES, type Category, type Project } from "@/lib/models";
+import ProjectCard from "@/components/projects/ProjectCard";
 
 export default function FeaturedProjects({ projects }: { projects: Project[] }) {
   const [filter, setFilter] = useState<Category | "All">("All");
@@ -21,7 +21,6 @@ export default function FeaturedProjects({ projects }: { projects: Project[] }) 
           <div className="gold-rule mx-auto mt-5" />
         </div>
 
-        {/* filters */}
         <div className="mt-10 flex flex-wrap justify-center gap-2">
           {(["All", ...CATEGORIES] as const).map((c) => (
             <button
@@ -49,21 +48,7 @@ export default function FeaturedProjects({ projects }: { projects: Project[] }) 
                 exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.35, delay: (i % 6) * 0.04 }}
               >
-                <Link href={`/projects/${p.slug}`} className="card-shadow card-shadow-hover group block overflow-hidden rounded-xl bg-white">
-                  <div className="relative aspect-[4/3] overflow-hidden">
-                    <Image src={p.cover} alt={p.title} fill sizes="(max-width:1024px) 100vw, 33vw" className="object-cover transition-transform duration-500 group-hover:scale-105" />
-                    {p.status === "ongoing" && (
-                      <span className="absolute right-3 top-3 rounded-full bg-[#c9a14a] px-2.5 py-1 text-[11px] font-bold text-white">
-                        ● Ongoing
-                      </span>
-                    )}
-                  </div>
-                  <div className="p-5">
-                    <p className="text-xs font-semibold text-[#c9a14a]">{p.category}</p>
-                    <h3 className="mt-1 text-lg font-bold text-[#14181f]">{p.title}</h3>
-                    <p className="mt-1 text-sm text-[#8a929c]">{p.location}</p>
-                  </div>
-                </Link>
+                <ProjectCard p={p} />
               </motion.div>
             ))}
           </AnimatePresence>

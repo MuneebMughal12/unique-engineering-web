@@ -1,12 +1,15 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { processSteps } from "@/data/site-content";
 
 export default function HowWeWork() {
+  const [open, setOpen] = useState(0);
+
   return (
-    <section className="bg-white py-20 sm:py-24">
+    <section className="relative overflow-hidden bg-white py-20 sm:py-24">
       <div className="mx-auto max-w-[1300px] px-5 sm:px-8">
         <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
           <div>
@@ -29,23 +32,32 @@ export default function HowWeWork() {
             </div>
           </div>
 
+          {/* accordion */}
           <div className="space-y-3">
-            {processSteps.map((s, i) => (
-              <motion.div
-                key={s.n}
-                initial={{ opacity: 0, x: 24 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.45, delay: i * 0.06 }}
-                className="flex gap-5 rounded-xl border border-[#eef0f3] bg-white p-5 transition-colors hover:border-[#c9a14a]/40"
-              >
-                <span className="text-2xl font-extrabold text-[#c9a14a]/30">{s.n}</span>
-                <div>
-                  <h3 className="font-bold text-[#14181f]">{s.title}</h3>
-                  <p className="mt-1 text-sm leading-relaxed text-[#6a727e]">{s.body}</p>
+            {processSteps.map((s, i) => {
+              const isOpen = open === i;
+              return (
+                <div
+                  key={s.n}
+                  className={`overflow-hidden rounded-xl border transition-colors ${isOpen ? "border-[#c9a14a] bg-[#14181f] text-white" : "border-[#eef0f3] bg-white"}`}
+                >
+                  <button onClick={() => setOpen(isOpen ? -1 : i)} className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left" aria-expanded={isOpen}>
+                    <span className="flex items-center gap-3">
+                      <span className={`text-lg font-extrabold ${isOpen ? "text-[#c9a14a]" : "text-[#c9a14a]/40"}`}>{s.n}</span>
+                      <span className={`font-bold ${isOpen ? "text-white" : "text-[#14181f]"}`}>{s.title}</span>
+                    </span>
+                    <span className={`text-lg ${isOpen ? "text-[#c9a14a]" : "text-[#8a929c]"}`}>{isOpen ? "▴" : "▾"}</span>
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }} className="overflow-hidden">
+                        <p className="px-5 pb-5 pl-14 text-sm leading-relaxed text-[#c3c8d0]">{s.body}</p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
-              </motion.div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

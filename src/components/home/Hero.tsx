@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { projects } from "@/data/projects";
+import { company } from "@/data/company";
 
 export default function Hero() {
   const featured = projects[0];
@@ -61,15 +62,14 @@ export default function Hero() {
             </Link>
           </motion.div>
 
-          <div className="mt-10 flex flex-wrap gap-x-10 gap-y-4">
-            {[
-              ["Design + Build", "Under one roof"],
-              ["Map Approval", "Society & TMA"],
-              ["Live Tracking", "Watch progress"],
-            ].map(([a, b]) => (
-              <div key={a}>
-                <p className="text-sm font-bold text-[#14181f]">{a}</p>
-                <p className="text-xs text-[#8a929c]">{b}</p>
+          <div className="mt-10 flex flex-wrap gap-x-10 gap-y-5">
+            {company.stats.slice(0, 3).map((s) => (
+              <div key={s.label}>
+                <p className="text-3xl font-extrabold text-[#c9a14a] sm:text-4xl">
+                  {s.value}
+                  {s.suffix}
+                </p>
+                <p className="text-xs font-medium uppercase tracking-wide text-[#8a929c]">{s.label}</p>
               </div>
             ))}
           </div>
