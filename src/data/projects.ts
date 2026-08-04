@@ -4,7 +4,7 @@
 // Bricks N Builders work. Replace every project below (and its images) with the
 // client's own completed projects and photographs before the site goes live.
 
-export type Category = "Residential" | "Commercial" | "Design & Map" | "Renovation";
+export type Category = "Residential" | "Commercial" | "Mixed-Use" | "Renovation";
 
 export type Project = {
   slug: string;
@@ -88,21 +88,21 @@ export const projects: Project[] = [
     images: [img("office-glazing"), img("institutional-building"), img("hall-interior"), img("concrete-pour")],
   },
   {
-    slug: "society-map-approval",
-    title: "Society Map Approval",
-    client: "Multiple Clients",
-    location: "Rehbar Housing Society, Rawalpindi",
+    slug: "mixed-use-development",
+    title: "Mixed-Use Development",
+    client: "Private Client",
+    location: "Bahria Town, Rawalpindi",
     year: "2024",
-    category: "Design & Map",
-    tags: ["Map Approval", "Documentation", "Design"],
+    category: "Mixed-Use",
+    tags: ["Mixed-Use", "Retail + Residential", "Construction"],
     summary:
-      "Design and map-approval service for plot owners in Rehbar Housing Society — drawings prepared and approvals secured so construction can begin.",
+      "A mixed-use development with ground-floor retail and residential apartments above — designed, approved and constructed from the ground up.",
     scope: [
-      "Site measurement and requirement gathering",
-      "Architectural and structural drawings",
-      "Society by-law compliance check",
-      "Submission and follow-up with the society office",
-      "Approved map handed to the owner",
+      "Architectural and structural design",
+      "Society map approval",
+      "Multi-storey RCC frame",
+      "Ground-floor retail units",
+      "Residential apartments and finishing",
     ],
     cover: img("planning-gantt"),
     images: [img("planning-gantt"), img("survey-setout"), img("survey-level"), img("site-team")],
@@ -150,7 +150,7 @@ export const projects: Project[] = [
   },
 ];
 
-export const categories: Category[] = ["Residential", "Commercial", "Design & Map", "Renovation"];
+export const categories: Category[] = ["Residential", "Commercial", "Mixed-Use", "Renovation"];
 
 export const getProject = (slug: string) => projects.find((p) => p.slug === slug);
 export const projectIndex = (slug: string) => projects.findIndex((p) => p.slug === slug);

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PageHeader from "@/components/PageHeader";
 import ProjectGrid from "@/components/projects/ProjectGrid";
 import { getProjects } from "@/lib/projects-repo";
 
@@ -7,34 +8,28 @@ export const revalidate = 60;
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "Homes, commercial projects and map approvals designed and built by Bricks N Builders across Rawalpindi and Islamabad.",
+    "Homes, commercial and mixed-use projects designed and built by Bricks N Builders across Rawalpindi and Islamabad.",
 };
 
 export default async function ProjectsPage() {
   const projects = await getProjects();
   return (
-    <section className="relative pb-28 pt-32 sm:pt-40">
-      <div className="glow pointer-events-none absolute inset-x-0 top-0 h-[60vh]" />
-      <div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
-        <p className="eyebrow">Portfolio</p>
-        <h1 className="display mt-5 text-[13vw] leading-[0.9] sm:text-[8vw] lg:text-[5.2vw]">
-          <span className="lead">Our</span>
-          <span>
-            recent <span className="hot">projects</span>
-          </span>
-          <span>Rawalpindi &amp; Islamabad</span>
-        </h1>
-
-        <p className="mt-8 max-w-2xl text-base leading-relaxed text-[#9a9a9a] sm:text-lg">
-          From family homes and corner bungalows to commercial plazas and society map
-          approvals — a look at the kind of work we design, approve and build across the
-          twin cities.
-        </p>
-
-        <div className="mt-16">
+    <>
+      <PageHeader title="Our Projects" crumb="Projects" />
+      <section className="bg-white py-16 sm:py-20">
+        <div className="mx-auto max-w-[1300px] px-5 sm:px-8">
+          <div className="mb-10 max-w-2xl">
+            <p className="eyebrow">Portfolio</p>
+            <h2 className="heading mt-3 text-3xl sm:text-4xl">Delivering Projects That Create Long-Term Value</h2>
+            <div className="gold-rule mt-5" />
+            <p className="mt-5 text-base leading-relaxed text-[#444b54]">
+              From family homes and bungalows to commercial plazas and mixed-use developments —
+              a look at the work we design, approve and build across the twin cities.
+            </p>
+          </div>
           <ProjectGrid projects={projects} />
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

@@ -8,10 +8,11 @@ import { company } from "@/data/company";
 
 const links = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
+  { href: "/about", label: "About Us" },
+  { href: "/team", label: "Team" },
   { href: "/services", label: "Services" },
   { href: "/projects", label: "Projects" },
-  { href: "/contact", label: "Contact" },
+  { href: "/contact", label: "Contact Us" },
 ];
 
 export default function Nav() {
@@ -22,7 +23,7 @@ export default function Nav() {
   useEffect(() => setOpen(false), [path]);
 
   useEffect(() => {
-    const onScroll = () => setSolid(window.scrollY > 40);
+    const onScroll = () => setSolid(window.scrollY > 30);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -38,18 +39,22 @@ export default function Nav() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-[500] transition-colors duration-300 ${
-          solid ? "bg-[#0a0a0a]/85 backdrop-blur-md" : "bg-transparent"
+        className={`fixed inset-x-0 top-0 z-[500] transition-all duration-300 ${
+          solid ? "bg-white/95 shadow-[0_1px_20px_rgba(20,24,31,0.08)] backdrop-blur" : "bg-white"
         }`}
       >
-        <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-5 py-4 sm:px-8">
-          <Link href="/" className="group flex flex-col leading-none">
-            <span className="text-sm font-bold uppercase tracking-tight sm:text-base">
-              <span className="gold-text">Bricks</span> N{" "}
-              <span className="gold-text">Builders</span>
+        <div className="mx-auto flex max-w-[1300px] items-center justify-between gap-4 px-5 py-3.5 sm:px-8">
+          <Link href="/" className="flex items-center gap-2.5">
+            <span className="flex h-9 w-9 items-center justify-center rounded-md bg-gradient-to-br from-[#c9a14a] to-[#a07d2c] text-sm font-extrabold text-white">
+              B
             </span>
-            <span className="mt-1 hidden text-[10px] tracking-[0.18em] text-[#8a8a8a] sm:block">
-              DESIGN · CONSTRUCTION · MAP APPROVAL
+            <span className="flex flex-col leading-none">
+              <span className="text-[15px] font-extrabold uppercase tracking-tight text-[#14181f]">
+                Bricks <span className="text-[#c9a14a]">N</span> Builders
+              </span>
+              <span className="mt-0.5 text-[9px] font-medium tracking-[0.16em] text-[#8a929c]">
+                {company.tagline.toUpperCase()}
+              </span>
             </span>
           </Link>
 
@@ -61,34 +66,22 @@ export default function Nav() {
                 <Link
                   key={l.href}
                   href={l.href}
-                  className={`relative text-sm transition-colors ${
-                    active ? "text-white" : "text-[#8a8a8a] hover:text-white"
+                  className={`text-sm font-medium transition-colors ${
+                    active ? "text-[#c9a14a]" : "text-[#444b54] hover:text-[#c9a14a]"
                   }`}
                 >
                   {l.label}
-                  {active && (
-                    <motion.span
-                      layoutId="nav-dot"
-                      className="absolute -bottom-1.5 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-[#d2a24c]"
-                    />
-                  )}
                 </Link>
               );
             })}
           </nav>
 
           <div className="flex items-center gap-3">
-            <a
-              href={`tel:${company.offices[0].phones[0]}`}
-              className="hidden text-sm text-[#8a8a8a] transition-colors hover:text-white md:block"
-            >
-              {company.offices[0].phones[0]}
-            </a>
             <Link
               href="/contact"
-              className="hidden rounded-full border border-[#d2a24c] px-4 py-2 text-sm text-[#d2a24c] transition-colors hover:bg-[#d2a24c] hover:text-[#0a0a0a] sm:block"
+              className="hidden rounded-full bg-[#14181f] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#c9a14a] sm:inline-block"
             >
-              Get a Quote
+              Get Consultation
             </Link>
 
             <button
@@ -97,21 +90,9 @@ export default function Nav() {
               aria-expanded={open}
               className="relative z-[600] flex h-10 w-10 flex-col items-center justify-center gap-[5px] lg:hidden"
             >
-              <span
-                className={`block h-[2px] w-6 bg-white transition-transform duration-300 ${
-                  open ? "translate-y-[7px] rotate-45" : ""
-                }`}
-              />
-              <span
-                className={`block h-[2px] w-6 bg-white transition-opacity duration-200 ${
-                  open ? "opacity-0" : ""
-                }`}
-              />
-              <span
-                className={`block h-[2px] w-6 bg-white transition-transform duration-300 ${
-                  open ? "-translate-y-[7px] -rotate-45" : ""
-                }`}
-              />
+              <span className={`block h-[2px] w-6 bg-[#14181f] transition-transform duration-300 ${open ? "translate-y-[7px] rotate-45" : ""}`} />
+              <span className={`block h-[2px] w-6 bg-[#14181f] transition-opacity duration-200 ${open ? "opacity-0" : ""}`} />
+              <span className={`block h-[2px] w-6 bg-[#14181f] transition-transform duration-300 ${open ? "-translate-y-[7px] -rotate-45" : ""}`} />
             </button>
           </div>
         </div>
@@ -124,39 +105,27 @@ export default function Nav() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[550] bg-[#0a0a0a] lg:hidden"
+            className="fixed inset-0 z-[550] bg-white lg:hidden"
           >
-            <div className="glow absolute inset-0" />
-            <nav className="relative flex h-full flex-col justify-center gap-2 px-8">
+            <nav className="relative flex h-full flex-col justify-center gap-1 px-8">
               {links.map((l, i) => (
                 <motion.div
                   key={l.href}
-                  initial={{ opacity: 0, y: 24 }}
+                  initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.06 * i + 0.08 }}
+                  transition={{ delay: 0.05 * i + 0.08 }}
                 >
-                  <Link
-                    href={l.href}
-                    className="block py-2 text-4xl font-bold uppercase tracking-tight text-white"
-                  >
+                  <Link href={l.href} className="block py-2.5 text-3xl font-extrabold uppercase tracking-tight text-[#14181f]">
                     {l.label}
                   </Link>
                 </motion.div>
               ))}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.42 }}
-                className="mt-8 space-y-1 text-sm text-[#8a8a8a]"
-              >
-                <a href={`mailto:${company.email}`} className="block">
-                  {company.email}
-                </a>
-                {company.offices[0].phones.map((p) => (
-                  <a key={p} href={`tel:${p}`} className="block">
-                    {p}
-                  </a>
-                ))}
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="mt-8">
+                <Link href="/contact" className="inline-block rounded-full bg-[#c9a14a] px-6 py-3 text-sm font-semibold text-white">
+                  Get Consultation
+                </Link>
+                <p className="mt-5 text-sm text-[#8a929c]">{company.offices[0].phones[0]}</p>
+                <p className="text-sm text-[#8a929c]">{company.email}</p>
               </motion.div>
             </nav>
           </motion.div>

@@ -2,169 +2,110 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
-import Typewriter from "../Typewriter";
-import { company } from "@/data/company";
-
-const capabilities = [
-  "Architectural Design",
-  "Map Approval",
-  "Grey Structure",
-  "Finishing & Turnkey",
-  "Renovation & Extension",
-  "Interior Design",
-];
+import { motion } from "motion/react";
+import { projects } from "@/data/projects";
 
 export default function Hero() {
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-  const backdropY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const backdropScale = useTransform(scrollYProgress, [0, 1], [1.04, 1.14]);
-  const contentY = useTransform(scrollYProgress, [0, 1], [0, 110]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.72, 1], [1, 0.82, 0]);
-  const railX = useTransform(scrollYProgress, [0, 1], [0, 50]);
+  const featured = projects[0];
 
   return (
-    <section ref={ref} className="relative min-h-[100svh] overflow-hidden pt-24">
-      {/* backdrop */}
-      <motion.div
-        style={{ y: backdropY, scale: backdropScale }}
-        className="absolute -inset-[8%] will-change-transform"
-      >
-        <Image
-          src="/img/villa-karen.jpg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover opacity-45"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/70 to-[#0a0a0a]/30" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-[#0a0a0a]/60" />
-        <div className="glow absolute inset-0" />
-      </motion.div>
+    <section className="relative overflow-hidden bg-[#f5f7fa] pt-28 sm:pt-32">
+      {/* soft accent shapes */}
+      <div className="pointer-events-none absolute -right-40 -top-20 h-[420px] w-[420px] rounded-full bg-[#c9a14a]/10 blur-3xl" />
+      <div className="pointer-events-none absolute -left-32 bottom-0 h-[360px] w-[360px] rounded-full bg-[#2c3e63]/5 blur-3xl" />
 
-      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-        {[18, 34, 57, 76, 88].map((left, i) => (
-          <motion.span
-            key={left}
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: [0, 0.9, 0.25], y: [18, 0, -34] }}
-            transition={{ duration: 2.8 + i * 0.35, delay: 0.8 + i * 0.22, repeat: Infinity, repeatDelay: 1.4 }}
-            className="absolute h-1.5 w-1.5 rounded-full bg-[#d2a24c] shadow-[0_0_14px_#d2a24c]"
-            style={{ left: `${left}%`, top: `${28 + (i % 3) * 18}%` }}
-          />
-        ))}
-      </div>
+      <div className="relative mx-auto grid max-w-[1300px] items-center gap-12 px-5 pb-16 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:pb-24">
+        <div>
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-2 rounded-full border border-[#e6e8ec] bg-white px-4 py-1.5 text-xs font-semibold text-[#c9a14a]"
+          >
+            <span className="h-1.5 w-1.5 rounded-full bg-[#c9a14a]" />
+            {company_tagline()}
+          </motion.p>
 
-      <motion.div
-        style={{ y: contentY, opacity: contentOpacity }}
-        className="relative mx-auto flex min-h-[calc(100svh-6rem)] max-w-[1400px] flex-col justify-between px-5 pb-10 will-change-transform sm:px-8"
-      >
-        <div className="grid flex-1 items-center gap-10 py-10 lg:grid-cols-[1.35fr_1fr]">
-          {/* headline */}
-          <div>
-            <motion.p
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.15 }}
-              className="eyebrow"
-            >
-              {company.tagline} · Rawalpindi &amp; Islamabad
-            </motion.p>
+          <motion.h1
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.6 }}
+            className="heading mt-5 text-[10vw] leading-[1.05] sm:text-6xl lg:text-[4.1rem]"
+          >
+            Built on Trust.
+            <br />
+            <span className="gold-text">Delivered</span> on Time.
+          </motion.h1>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 26 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.25, duration: 0.7 }}
-              className="display mt-4 text-[13vw] leading-[0.88] sm:text-[9vw] lg:text-[6.4vw]"
-            >
-              <span className="lead">We design</span>
-              <span className="lead">&amp; build your</span>
-              <span className="hot">
-                <Typewriter
-                  words={["HOME", "DREAM", "FUTURE", "SMILE"]}
-                />
-              </span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="mt-7 max-w-lg text-sm leading-relaxed text-[#b4b4b4] sm:text-base"
-            >
-              A Rawalpindi-based design &amp; construction company — from architectural
-              drawings and society map approval to grey structure, finishing and
-              turnkey handover of your home or commercial project.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="mt-8 flex flex-wrap gap-3"
-            >
-              <Link
-                href="/projects"
-                className="rounded-full bg-[#d2a24c] px-6 py-3 text-sm font-medium text-[#0a0a0a] transition-opacity hover:opacity-85"
-              >
-                View our projects
-              </Link>
-              <Link
-                href="/contact"
-                className="rounded-full border border-[#2e2e2e] px-6 py-3 text-sm text-[#d4d4d4] transition-colors hover:border-white hover:text-white"
-              >
-                Request a quote
-              </Link>
-            </motion.div>
-          </div>
-
-          {/* capability list */}
-          <motion.div
-            style={{ x: railX }}
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.45, duration: 0.7 }}
-            className="lg:justify-self-end"
+            transition={{ delay: 0.25 }}
+            className="mt-6 max-w-lg text-base leading-relaxed text-[#444b54] sm:text-lg"
           >
-            <p className="eyebrow">What we do</p>
-            <ul className="mt-4 space-y-1.5">
-              {capabilities.map((c, i) => (
-                <motion.li
-                  key={c}
-                  initial={{ opacity: 0, x: 14 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.55 + i * 0.06 }}
-                  className="text-sm text-[#9a9a9a] transition-colors hover:text-white sm:text-base"
-                >
-                  {c}
-                </motion.li>
-              ))}
-            </ul>
+            Bricks N Builders delivers integrated design and construction — from architectural
+            drawings and map approval to grey structure, finishing and turnkey handover across
+            Rawalpindi &amp; Islamabad.
+          </motion.p>
 
-            <div className="mt-8 h-px w-full max-w-xs bg-gradient-to-r from-[#d2a24c] to-transparent" />
-
-            <p className="mt-5 text-xs text-[#6a6a6a]">Approved builder</p>
-            <p className="mt-1 text-sm text-[#d4d4d4]">Rehbar Housing Society</p>
-            <p className="mt-1 text-sm text-[#d4d4d4]">Society &amp; TMA map approval</p>
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.35 }}
+            className="mt-8 flex flex-wrap gap-3"
+          >
+            <Link href="/contact" className="rounded-full bg-[#c9a14a] px-7 py-3.5 text-sm font-semibold text-white transition-opacity hover:opacity-90">
+              Get Consultation
+            </Link>
+            <Link href="/projects" className="rounded-full border border-[#d3d8df] bg-white px-7 py-3.5 text-sm font-semibold text-[#14181f] transition-colors hover:border-[#c9a14a] hover:text-[#c9a14a]">
+              View Projects
+            </Link>
           </motion.div>
+
+          <div className="mt-10 flex flex-wrap gap-x-10 gap-y-4">
+            {[
+              ["Design + Build", "Under one roof"],
+              ["Map Approval", "Society & TMA"],
+              ["Live Tracking", "Watch progress"],
+            ].map(([a, b]) => (
+              <div key={a}>
+                <p className="text-sm font-bold text-[#14181f]">{a}</p>
+                <p className="text-xs text-[#8a929c]">{b}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
+        {/* featured project card */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
-          className="flex items-center gap-3 text-xs text-[#6a6a6a]"
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
+          className="relative"
         >
-          <span className="h-8 w-px bg-gradient-to-b from-transparent to-[#d2a24c]" />
-          Scroll down
+          <div className="overflow-hidden rounded-2xl bg-white card-shadow">
+            <div className="relative aspect-[4/3]">
+              <Image src={featured.cover} alt={featured.title} fill priority sizes="(max-width:1024px) 100vw, 45vw" className="object-cover" />
+              <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-[#c9a14a]">
+                Featured Project
+              </span>
+            </div>
+            <div className="flex items-center justify-between gap-4 p-5">
+              <div>
+                <p className="text-xs font-semibold text-[#c9a14a]">{featured.category}</p>
+                <p className="mt-0.5 font-bold text-[#14181f]">{featured.title}</p>
+                <p className="text-xs text-[#8a929c]">{featured.location}</p>
+              </div>
+              <Link href={`/projects/${featured.slug}`} className="shrink-0 rounded-full bg-[#14181f] px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#c9a14a]">
+                View Project
+              </Link>
+            </div>
+          </div>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
+}
+
+function company_tagline() {
+  return "We Build Smile · Since day one";
 }

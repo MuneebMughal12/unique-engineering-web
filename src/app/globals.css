@@ -1,35 +1,39 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #0a0a0a;
-  --color-ink-2: #111111;
-  --color-line: #1f1f1f;
-  --color-muted: #8a8a8a;
-  --color-dim: #4a4a4a;
-  --color-accent: #d2a24c;
-  --color-accent-soft: #e8ce93;
-  --color-accent-deep: #7a5626;
+  /* light theme */
+  --color-paper: #ffffff;
+  --color-mist: #f5f7fa;
+  --color-line: #e6e8ec;
+  --color-ink: #14181f;
+  --color-body: #444b54;
+  --color-muted: #8a929c;
 
-  --font-display: var(--font-jamjuree), system-ui, sans-serif;
+  /* brand */
+  --color-gold: #c9a14a;
+  --color-gold-deep: #a07d2c;
+  --color-navy: #2c3e63;
+  --color-navy-deep: #1d2b47;
+
+  --font-display: var(--font-jakarta), system-ui, sans-serif;
 }
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 html {
-  background: #0a0a0a;
+  background: #ffffff;
 }
 
 body {
-  background: #0a0a0a;
-  color: #fff;
-  font-family: var(--font-jamjuree), system-ui, sans-serif;
+  background: #ffffff;
+  color: #444b54;
+  font-family: var(--font-jakarta), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 
-/* Hide native cursor only where we draw our own */
 @media (hover: hover) and (pointer: fine) {
   body.has-cursor,
   body.has-cursor * {
@@ -38,71 +42,67 @@ body {
 }
 
 ::selection {
-  background: #d2a24c;
-  color: #0a0a0a;
+  background: #c9a14a;
+  color: #ffffff;
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: #f5f7fa;
 }
 ::-webkit-scrollbar-thumb {
-  background: #262626;
+  background: #d3d8df;
   border-radius: 99px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #d2a24c;
+  background: #c9a14a;
 }
 
-/* ---- Display headings: staggered indent, one word in accent ---- */
-.display {
-  text-transform: uppercase;
-  font-weight: 700;
-  line-height: 0.92;
-  letter-spacing: -0.02em;
-  color: #8a8a8a;
-}
-.display .lead {
-  color: #fff;
-}
-.display .hot {
-  /* metallic gold gradient, like the logo */
-  background: linear-gradient(180deg, #f0dca6 0%, #d2a24c 48%, #8a6224 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-.display > span {
-  display: block;
-}
-.display > span:nth-child(2) {
-  padding-left: 0.1em;
-}
-.display > span:nth-child(3) {
-  padding-left: 0.2em;
-}
-
-/* reusable gold gradient text (brand wordmark, accents) */
-.gold-text {
-  background: linear-gradient(180deg, #f0dca6 0%, #d2a24c 50%, #9a6e2c 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
+/* eyebrow label */
 .eyebrow {
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #8a8a8a;
+  color: #c9a14a;
 }
 
-.glow {
-  background:
-    radial-gradient(60% 60% at 50% 40%, rgba(210, 162, 76, 0.12), transparent 70%),
-    radial-gradient(40% 40% at 85% 85%, rgba(210, 162, 76, 0.06), transparent 70%);
+/* section heading */
+.heading {
+  color: #14181f;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+}
+
+/* gold gradient text (wordmark / accents) */
+.gold-text {
+  background: linear-gradient(180deg, #d9b869 0%, #c9a14a 50%, #a07d2c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* thin gold rule */
+.gold-rule {
+  height: 3px;
+  width: 3rem;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #c9a14a, #e0c583);
+}
+
+/* subtle card shadow */
+.card-shadow {
+  box-shadow: 0 1px 2px rgba(20, 24, 31, 0.04), 0 8px 24px rgba(20, 24, 31, 0.06);
+}
+.card-shadow-hover {
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+.card-shadow-hover:hover {
+  box-shadow: 0 2px 6px rgba(20, 24, 31, 0.06), 0 16px 40px rgba(20, 24, 31, 0.1);
+  transform: translateY(-4px);
 }
 
 @media (prefers-reduced-motion: reduce) {

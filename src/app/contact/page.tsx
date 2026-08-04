@@ -1,37 +1,30 @@
 import type { Metadata } from "next";
+import PageHeader from "@/components/PageHeader";
 import ContactForm from "@/components/ContactForm";
 import { company } from "@/data/company";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: "Contact Us",
   description:
     "Get in touch with Bricks N Builders — offices in Rehbar Housing Society (Chakri Road) and Dhamial Road, Rawalpindi.",
 };
 
 export default function ContactPage() {
-  const wa = `https://wa.me/${company.whatsapp}?text=${encodeURIComponent(
-    company.whatsappMessage
-  )}`;
+  const wa = `https://wa.me/${company.whatsapp}?text=${encodeURIComponent(company.whatsappMessage)}`;
 
   return (
-    <section className="relative overflow-hidden pb-28 pt-32 sm:pt-40">
-      <div className="glow pointer-events-none absolute inset-x-0 top-0 h-[70vh]" />
+    <>
+      <PageHeader title="Contact Us" crumb="Contact" />
 
-      <div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
-        <p className="eyebrow">Contact</p>
-        <h1 className="display mt-5 text-[13vw] leading-[0.9] sm:text-[8vw] lg:text-[5.2vw]">
-          <span className="lead">Let&rsquo;s talk</span>
-          <span>
-            about your <span className="hot">project</span>
-          </span>
-        </h1>
-
-        <div className="mt-16 grid gap-14 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
+      <section className="bg-white py-16 sm:py-20">
+        <div className="mx-auto grid max-w-[1300px] gap-12 px-5 sm:px-8 lg:grid-cols-[1.1fr_0.9fr]">
           {/* form */}
           <div>
-            <h2 className="text-xl font-semibold sm:text-2xl">Send us an enquiry</h2>
-            <p className="mt-2 text-sm text-[#8a8a8a]">
-              Tell us the scope and location — we&rsquo;ll come back with a plan and a price.
+            <p className="eyebrow">Get in touch</p>
+            <h2 className="heading mt-3 text-3xl sm:text-4xl">Let&rsquo;s talk about your project</h2>
+            <div className="gold-rule mt-5" />
+            <p className="mt-5 max-w-md text-base leading-relaxed text-[#444b54]">
+              Tell us the scope and location — we&rsquo;ll come back with a plan and a clear estimate.
             </p>
             <div className="mt-8">
               <ContactForm />
@@ -39,73 +32,45 @@ export default function ContactPage() {
           </div>
 
           {/* details */}
-          <div className="space-y-10">
-            <div>
-              <h2 className="text-xl font-semibold sm:text-2xl">Reach us directly</h2>
-              <div className="mt-6 space-y-3">
-                <a
-                  href={wa}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-between rounded-sm border border-[#242424] p-4 transition-colors hover:border-[#25D366]"
-                >
-                  <span className="text-sm text-white">WhatsApp</span>
-                  <span className="text-sm text-[#8a8a8a]">{company.offices[0].phones[0]}</span>
-                </a>
-                <a
-                  href={`mailto:${company.email}`}
-                  className="flex items-center justify-between rounded-sm border border-[#242424] p-4 transition-colors hover:border-[#d2a24c]"
-                >
-                  <span className="text-sm text-white">Email</span>
-                  <span className="text-sm text-[#8a8a8a]">{company.email}</span>
-                </a>
+          <div className="space-y-4">
+            <a href={wa} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between rounded-xl border border-[#eef0f3] bg-white p-5 card-shadow transition-colors hover:border-[#25D366]">
+              <div>
+                <p className="text-xs font-semibold text-[#8a929c]">WhatsApp</p>
+                <p className="font-bold text-[#14181f]">{company.offices[0].phones[0]}</p>
               </div>
-            </div>
+              <span className="text-[#25D366]">→</span>
+            </a>
+            <a href={`mailto:${company.email}`} className="flex items-center justify-between rounded-xl border border-[#eef0f3] bg-white p-5 card-shadow transition-colors hover:border-[#c9a14a]">
+              <div>
+                <p className="text-xs font-semibold text-[#8a929c]">Email</p>
+                <p className="font-bold text-[#14181f]">{company.email}</p>
+              </div>
+              <span className="text-[#c9a14a]">→</span>
+            </a>
 
             {company.offices.map((o) => (
-              <div key={o.label}>
-                <p className="eyebrow">{o.label}</p>
-                <address className="mt-3 space-y-1 text-sm not-italic text-[#b4b4b4]">
-                  {o.lines.map((l) => (
-                    <p key={l}>{l}</p>
-                  ))}
-                </address>
-                <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1">
+              <div key={o.label} className="rounded-xl border border-[#eef0f3] bg-[#f5f7fa] p-5">
+                <p className="text-xs font-semibold text-[#c9a14a]">{o.label}</p>
+                <p className="mt-2 text-sm text-[#444b54]">{o.lines.join(", ")}</p>
+                <div className="mt-2 flex flex-wrap gap-x-5 gap-y-1">
                   {o.phones.map((p) => (
-                    <a
-                      key={p}
-                      href={`tel:${p}`}
-                      className="text-sm text-[#8a8a8a] transition-colors hover:text-[#d2a24c]"
-                    >
-                      {p}
-                    </a>
+                    <a key={p} href={`tel:${p}`} className="text-sm font-medium text-[#14181f] hover:text-[#c9a14a]">{p}</a>
                   ))}
                 </div>
               </div>
             ))}
 
-            <div>
-              <p className="eyebrow">Registrations</p>
-              <ul className="mt-3 space-y-1 text-sm text-[#b4b4b4]">
-                {company.certifications.map((c) => (
-                  <li key={c.code}>
-                    {c.title} — <span className="text-[#8a8a8a]">{c.code}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="relative aspect-[16/10] overflow-hidden rounded-sm border border-[#242424]">
+            <div className="relative aspect-[16/10] overflow-hidden rounded-xl border border-[#eef0f3]">
               <iframe
                 title="Bricks N Builders — Rawalpindi"
                 src="https://www.openstreetmap.org/export/embed.html?bbox=72.95%2C33.52%2C73.15%2C33.66&layer=mapnik"
-                className="h-full w-full grayscale"
+                className="h-full w-full"
                 loading="lazy"
               />
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

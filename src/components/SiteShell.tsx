@@ -3,14 +3,12 @@
 import { usePathname } from "next/navigation";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import Cursor from "@/components/Cursor";
-import Preloader from "@/components/Preloader";
 import SmoothScroll from "@/components/SmoothScroll";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 /**
- * The public site chrome (nav, footer, cursor, preloader…) wraps every page
- * except the admin panel, which gets a clean, app-like shell of its own.
+ * Public site chrome wraps every page except the admin panel, which uses its
+ * own clean, dark shell.
  */
 export default function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -22,9 +20,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <Preloader />
       <SmoothScroll />
-      <Cursor />
       <Nav />
       <main>{children}</main>
       <Footer />

@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { Bai_Jamjuree } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import SiteShell from "@/components/SiteShell";
 import { company } from "@/data/company";
 
-const jamjuree = Bai_Jamjuree({
+const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-jamjuree",
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-jakarta",
   display: "swap",
 });
 
@@ -39,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${jamjuree.variable} antialiased`}>
+    <html lang="en" className={`${jakarta.variable} antialiased`}>
       <body>
         <SiteShell>{children}</SiteShell>
       </body>

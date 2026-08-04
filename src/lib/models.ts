@@ -1,6 +1,6 @@
 /** Shared types for projects + construction progress phases. */
 
-export type Category = "Residential" | "Commercial" | "Design & Map" | "Renovation";
+export type Category = "Residential" | "Commercial" | "Mixed-Use" | "Renovation";
 
 export type ProjectStatus = "ongoing" | "completed";
 
@@ -39,7 +39,7 @@ export type Project = {
 export const CATEGORIES: Category[] = [
   "Residential",
   "Commercial",
-  "Design & Map",
+  "Mixed-Use",
   "Renovation",
 ];
 

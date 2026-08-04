@@ -1,9 +1,9 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useScroll, useMotionValueEvent } from "motion/react";
+import { motion } from "motion/react";
 import type { Project } from "@/lib/models";
 import ProgressTracker from "./ProgressTracker";
 
@@ -16,242 +16,83 @@ export default function ProjectDetail({
   prev: Project;
   next: Project;
 }) {
-  const gallery = useRef<HTMLElement>(null);
   const [active, setActive] = useState(0);
-  const [dir, setDir] = useState(1);
-
-  const shots = project.images.length;
-
-  const { scrollYProgress } = useScroll({
-    target: gallery,
-    offset: ["start start", "end end"],
-  });
-
-  useMotionValueEvent(scrollYProgress, "change", (v) => {
-    const idx = Math.min(shots - 1, Math.max(0, Math.floor(v * shots)));
-    setActive((prevIdx) => {
-      if (idx !== prevIdx) setDir(idx > prevIdx ? 1 : -1);
-      return idx;
-    });
-  });
+  const img = project.images[active] ?? project.cover;
 
   return (
-    <div className="relative">
-      {/* blurred backdrop follows the active image */}
-      <div className="pointer-events-none fixed inset-0 -z-10">
-        {project.images.map((src, idx) => (
-          <motion.div
-            key={src + idx + "-bg"}
-            aria-hidden
-            initial={false}
-            animate={{ opacity: idx === active ? 1 : 0 }}
-            transition={{ duration: 0.9 }}
-            className="absolute inset-0"
-          >
-            {/* heavily blurred — a tiny source is plenty */}
-            <Image
-              src={src}
-              alt=""
-              fill
-              loading="eager"
-              quality={30}
-              sizes="128px"
-              className="scale-110 object-cover blur-3xl"
-            />
-          </motion.div>
-        ))}
-        <div className="absolute inset-0 bg-[#0a0a0a]/80" />
-      </div>
-
-      {/* ---------- scroll-driven gallery ---------- */}
-      <section ref={gallery} style={{ height: `${shots * 100}vh` }} className="relative">
-        <div className="sticky top-0 flex h-[100svh] flex-col justify-center px-5 pt-20 sm:px-8">
-          <div className="mx-auto w-full max-w-[1500px]">
-            <Link
-              href="/projects"
-              className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#3a3a3a] bg-[#0a0a0a]/50 px-5 py-2.5 text-sm text-[#d4d4d4] backdrop-blur transition-colors hover:border-white hover:text-white"
-            >
-              <span aria-hidden>‹</span> Back
-            </Link>
-
-            <div className="grid gap-5 lg:grid-cols-[92px_1fr_300px] lg:gap-8">
-              {/* left rail */}
-              <div className="order-2 flex items-center gap-4 lg:order-1 lg:flex-col lg:items-stretch lg:justify-start lg:gap-0">
-                <div className="relative h-14 w-20 shrink-0 overflow-hidden rounded-sm border-2 border-[#d2a24c] lg:h-20 lg:w-full">
-                  {project.images.map((src, idx) => (
-                    <motion.div
-                      key={src + idx + "-th"}
-                      aria-hidden
-                      initial={false}
-                      animate={{ opacity: idx === active ? 1 : 0, y: idx === active ? 0 : dir * 20 }}
-                      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                      className="absolute inset-0"
-                    >
-                      <Image src={src} alt="" fill loading="eager" sizes="92px" className="object-cover" />
-                    </motion.div>
-                  ))}
-                </div>
-
-                <div className="flex flex-1 gap-1.5 lg:mt-4 lg:flex-col lg:gap-2">
-                  {project.images.map((s, idx) => (
-                    <span
-                      key={s + idx}
-                      className={`block h-[2px] flex-1 transition-colors duration-300 lg:w-full lg:flex-none ${
-                        idx === active ? "bg-[#d2a24c]" : "bg-[#2a2a2a]"
-                      }`}
-                    />
-                  ))}
-                </div>
-
-                <p className="shrink-0 text-sm lg:mt-6">
-                  <span className="text-lg font-bold text-[#d2a24c]">
-                    {String(active + 1).padStart(2, "0")}
-                  </span>
-                  <span className="text-[#5a5a5a]">/{String(shots).padStart(2, "0")}</span>
-                </p>
-              </div>
-
-              {/* centre image */}
-              <div className="order-1 lg:order-2">
-                <div className="relative h-[30svh] overflow-hidden rounded-sm bg-[#111] sm:h-[38svh] lg:h-[54svh]">
-                  {project.images.map((src, idx) => (
-                    <motion.div
-                      key={src + idx}
-                      aria-hidden={idx !== active}
-                      initial={false}
-                      animate={{
-                        opacity: idx === active ? 1 : 0,
-                        scale: idx === active ? 1 : 1.06,
-                        x: idx === active ? 0 : dir * 36,
-                      }}
-                      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                      className="absolute inset-0"
-                    >
-                      <Image
-                        src={src}
-                        alt={idx === active ? project.title : ""}
-                        fill
-                        loading="eager"
-                        sizes="(max-width: 1024px) 100vw, 900px"
-                        className="object-cover"
-                      />
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-
-              {/* right info */}
-              <aside className="order-3 space-y-3 lg:space-y-4">
-                <div>
-                  <p className="text-sm text-[#8a8a8a]">Worked For</p>
-                  <p className="mt-1.5 text-sm font-semibold text-white">{project.client}</p>
-                  <p className="text-sm text-[#d2a24c]">{project.year}</p>
-                </div>
-
-                {project.contractor && (
-                  <div>
-                    <p className="text-sm text-[#8a8a8a]">Main Contractor</p>
-                    <p className="mt-1.5 text-sm text-[#c4c4c4]">{project.contractor}</p>
-                  </div>
-                )}
-
-                <div className="h-px bg-[#2a2a2a]" />
-                <p className="line-clamp-4 text-sm leading-relaxed text-[#9a9a9a] lg:line-clamp-6">
-                  {project.summary}
-                </p>
-
-                <div className="hidden h-px bg-[#2a2a2a] lg:block" />
-
-                <div className="hidden lg:block">
-                  <p className="text-sm text-[#8a8a8a]">Location</p>
-                  <p className="mt-1.5 text-sm text-[#c4c4c4]">{project.location}</p>
-                </div>
-
-                {project.period && (
-                  <div className="hidden lg:block">
-                    <p className="text-sm text-[#8a8a8a]">Duration</p>
-                    <p className="mt-1.5 text-sm text-[#c4c4c4]">{project.period}</p>
-                  </div>
-                )}
-
-                <div className="flex flex-wrap gap-2 pt-1">
-                  {project.tags.map((t) => (
-                    <span
-                      key={t}
-                      className="rounded-full bg-[#1c1c1c] px-3 py-1 text-xs text-[#9a9a9a]"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </aside>
-            </div>
-
-            {/* prev / next pills + big title */}
-            <div className="mt-5 grid gap-4 lg:grid-cols-[92px_1fr] lg:gap-8">
-              <div className="flex gap-2 lg:flex-col">
-                <Link
-                  href={`/projects/${prev.slug}`}
-                  className="inline-flex items-center gap-2 rounded-full border border-[#3a3a3a] bg-[#0a0a0a]/50 px-4 py-2 text-xs text-[#d4d4d4] backdrop-blur transition-colors hover:border-[#d2a24c] hover:bg-[#d2a24c] hover:text-[#0a0a0a]"
-                >
-                  <span aria-hidden>‹</span> Previous
-                </Link>
-                <Link
-                  href={`/projects/${next.slug}`}
-                  className="inline-flex items-center gap-2 rounded-full border border-[#3a3a3a] bg-[#0a0a0a]/50 px-4 py-2 text-xs text-[#d4d4d4] backdrop-blur transition-colors hover:border-[#d2a24c] hover:bg-[#d2a24c] hover:text-[#0a0a0a]"
-                >
-                  Next <span aria-hidden>›</span>
-                </Link>
-              </div>
-
-              <h1 className="line-clamp-2 text-2xl font-semibold leading-[1.05] tracking-tight sm:text-4xl lg:text-[3.2rem]">
-                {project.title}
-              </h1>
-            </div>
+    <>
+      {/* header */}
+      <section className="relative overflow-hidden bg-[#14181f] pb-10 pt-28 text-white sm:pt-32">
+        <div className="pointer-events-none absolute -right-20 top-0 h-64 w-64 rounded-full bg-[#c9a14a]/15 blur-3xl" />
+        <div className="relative mx-auto max-w-[1300px] px-5 sm:px-8">
+          <Link href="/projects" className="text-sm text-[#8a929c] transition-colors hover:text-[#c9a14a]">‹ Back to projects</Link>
+          <div className="mt-4 flex flex-wrap items-center gap-3">
+            <span className="rounded-full bg-[#c9a14a] px-3 py-1 text-xs font-bold text-white">{project.category}</span>
+            {project.status === "ongoing" && (
+              <span className="rounded-full border border-[#c9a14a]/40 px-3 py-1 text-xs font-semibold text-[#c9a14a]">● Ongoing</span>
+            )}
           </div>
+          <h1 className="mt-3 text-3xl font-extrabold sm:text-5xl">{project.title}</h1>
+          <p className="mt-2 text-[#8a929c]">{project.location} · {project.year}</p>
         </div>
       </section>
 
-      {/* ---------- scope ---------- */}
-      <section className="relative bg-[#0a0a0a] pb-24 pt-20">
-        <div className="mx-auto max-w-[1500px] px-5 sm:px-8">
-          <div className="grid gap-10 border-t border-[#1f1f1f] pt-14 lg:grid-cols-[1fr_300px] lg:gap-16">
-            <div>
-              <p className="eyebrow">Scope of work</p>
-              <ul className="mt-5 space-y-3">
-                {project.scope.map((s, i) => (
-                  <motion.li
-                    key={s}
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.05 }}
-                    className="flex gap-3 text-sm leading-relaxed text-[#b4b4b4] sm:text-base"
-                  >
-                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#d2a24c]" />
+      {/* gallery + info */}
+      <section className="bg-white py-14 sm:py-16">
+        <div className="mx-auto grid max-w-[1300px] gap-10 px-5 sm:px-8 lg:grid-cols-[1.4fr_0.8fr]">
+          <div>
+            <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-[#f5f7fa] card-shadow">
+              <motion.div key={img} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }} className="absolute inset-0">
+                <Image src={img} alt={project.title} fill priority sizes="(max-width:1024px) 100vw, 60vw" className="object-cover" />
+              </motion.div>
+            </div>
+            <div className="mt-4 flex gap-3 overflow-x-auto">
+              {project.images.map((src, i) => (
+                <button
+                  key={src + i}
+                  onClick={() => setActive(i)}
+                  className={`relative h-16 w-24 shrink-0 overflow-hidden rounded-lg border-2 transition-all ${i === active ? "border-[#c9a14a]" : "border-transparent opacity-60 hover:opacity-100"}`}
+                >
+                  <Image src={src} alt="" fill sizes="96px" className="object-cover" />
+                </button>
+              ))}
+            </div>
+
+            <div className="mt-10">
+              <h2 className="heading text-2xl">Scope of Work</h2>
+              <div className="gold-rule mt-4" />
+              <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+                {project.scope.map((s) => (
+                  <li key={s} className="flex gap-3 text-sm leading-relaxed text-[#444b54]">
+                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#c9a14a]/10 text-[11px] text-[#c9a14a]">✓</span>
                     {s}
-                  </motion.li>
+                  </li>
                 ))}
               </ul>
             </div>
-
-            <div className="space-y-5">
-              <div>
-                <p className="eyebrow">Category</p>
-                <p className="mt-1.5 text-sm text-[#c4c4c4]">{project.category}</p>
-              </div>
-              <div>
-                <p className="eyebrow">Location</p>
-                <p className="mt-1.5 text-sm text-[#c4c4c4]">{project.location}</p>
-              </div>
-              <Link
-                href="/contact"
-                className="inline-block rounded-full bg-[#d2a24c] px-5 py-2.5 text-sm text-[#0a0a0a] transition-opacity hover:opacity-85"
-              >
-                Discuss a similar project
-              </Link>
-            </div>
           </div>
+
+          {/* sidebar */}
+          <aside className="space-y-5">
+            <div className="rounded-2xl border border-[#eef0f3] bg-[#f5f7fa] p-6">
+              <p className="text-sm leading-relaxed text-[#444b54]">{project.summary}</p>
+              <dl className="mt-6 space-y-4 border-t border-[#e6e8ec] pt-6 text-sm">
+                <Row label="Client" value={project.client} />
+                <Row label="Location" value={project.location} />
+                <Row label="Year" value={project.year} />
+                {project.period && <Row label="Duration" value={project.period} />}
+                <Row label="Category" value={project.category} />
+              </dl>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {project.tags.map((t) => (
+                  <span key={t} className="rounded-full border border-[#e6e8ec] bg-white px-3 py-1 text-xs text-[#6a727e]">{t}</span>
+                ))}
+              </div>
+            </div>
+            <Link href="/contact" className="block rounded-full bg-[#c9a14a] px-6 py-3.5 text-center text-sm font-semibold text-white transition-opacity hover:opacity-90">
+              Discuss a similar project
+            </Link>
+          </aside>
         </div>
       </section>
 
@@ -259,6 +100,29 @@ export default function ProjectDetail({
       {project.status === "ongoing" && project.phases.length > 0 && (
         <ProgressTracker phases={project.phases} />
       )}
+
+      {/* prev / next */}
+      <section className="bg-[#f5f7fa] py-12">
+        <div className="mx-auto flex max-w-[1300px] flex-col gap-4 px-5 sm:flex-row sm:px-8">
+          <Link href={`/projects/${prev.slug}`} className="group flex-1 rounded-xl border border-[#eef0f3] bg-white p-5 transition-colors hover:border-[#c9a14a]">
+            <p className="text-xs font-semibold text-[#8a929c] group-hover:text-[#c9a14a]">‹ Previous</p>
+            <p className="mt-1 font-bold text-[#14181f]">{prev.title}</p>
+          </Link>
+          <Link href={`/projects/${next.slug}`} className="group flex-1 rounded-xl border border-[#eef0f3] bg-white p-5 text-right transition-colors hover:border-[#c9a14a]">
+            <p className="text-xs font-semibold text-[#8a929c] group-hover:text-[#c9a14a]">Next ›</p>
+            <p className="mt-1 font-bold text-[#14181f]">{next.title}</p>
+          </Link>
+        </div>
+      </section>
+    </>
+  );
+}
+
+function Row({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex items-center justify-between gap-4">
+      <dt className="text-[#8a929c]">{label}</dt>
+      <dd className="text-right font-medium text-[#14181f]">{value}</dd>
     </div>
   );
 }
