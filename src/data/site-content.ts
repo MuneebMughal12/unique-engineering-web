@@ -32,7 +32,7 @@ export const processSteps = [
   {
     n: "02",
     title: "Design & Map Approval",
-    body: "Architectural, structural, 3D elevation, electrical and plumbing drawings, followed by submission and map approval from the concerned authority, including CDA, RDA, TMA, District Council and Cantonment Board.",
+    body: "Architectural, structural, 3D elevation, electrical and plumbing drawings. Submission and approval from the concerned authority (CDA, RDA, TMA, District Council and Cantonment Board).",
   },
   {
     n: "03",
