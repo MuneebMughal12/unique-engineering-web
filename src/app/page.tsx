@@ -8,6 +8,7 @@ import CTASection from "@/components/home/CTASection";
 import TestimonialsLight from "@/components/home/TestimonialsLight";
 import FAQSection from "@/components/home/FAQSection";
 import { getProjects } from "@/lib/projects-repo";
+import { getServices, getTeamMembers } from "@/lib/content-repo";
 import { buildPageMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
@@ -20,15 +21,15 @@ export const metadata = buildPageMetadata({
 });
 
 export default async function Home() {
-  const projects = await getProjects();
+  const [projects, services, team] = await Promise.all([getProjects(), getServices(), getTeamMembers()]);
   return (
     <>
-      <Hero />
+      <Hero projects={projects} />
       <ValueCards />
-      <ServicesSection />
+      <ServicesSection services={services} />
       <HowWeWork />
       <FeaturedProjects projects={projects} />
-      <TeamSection />
+      <TeamSection team={team} />
       <CTASection />
       <TestimonialsLight />
       <FAQSection />

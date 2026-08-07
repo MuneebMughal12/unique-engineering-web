@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { projects } from "@/data/projects";
+import type { Project } from "@/lib/models";
 
 const highlights = [
   { value: 15, suffix: "+", label: "Years Experience" },
@@ -38,8 +38,9 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
   return <>{display}{suffix}</>;
 }
 
-export default function Hero() {
-  const showcaseProjects = projects.slice(0, 3);
+export default function Hero({ projects }: { projects: Project[] }) {
+  const selected = projects.filter((project) => project.showInHero);
+  const showcaseProjects = (selected.length ? selected : projects).slice(0, 3);
   const [activeProject, setActiveProject] = useState(0);
 
   return (

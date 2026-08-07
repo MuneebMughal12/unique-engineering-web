@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
-import { services } from "@/data/services";
+import { getServices } from "@/lib/content-repo";
 import { processSteps } from "@/data/site-content";
 import { buildPageMetadata } from "@/lib/seo";
 
@@ -12,16 +12,8 @@ export const metadata = buildPageMetadata({
   path: "/services",
 });
 
-const covers = [
-  "/img/survey-setout.jpg",
-  "/img/planning-gantt.jpg",
-  "/img/concrete-pour.jpg",
-  "/img/interior-floor.jpg",
-  "/img/townhouse-karen.jpg",
-  "/img/hall-interior.jpg",
-];
-
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const services = await getServices();
   return (
     <>
       <PageHeader title="Our Services" crumb="Services" />
@@ -45,7 +37,7 @@ export default function ServicesPage() {
                 className="grid scroll-mt-24 items-center gap-8 overflow-hidden rounded-2xl border border-[#eef0f3] bg-white card-shadow lg:grid-cols-2"
               >
                 <div className={`relative aspect-[16/11] ${i % 2 === 1 ? "lg:order-2" : ""}`}>
-                  <Image src={covers[i % covers.length]} alt={s.title} fill sizes="(max-width:1024px) 100vw, 50vw" className="object-cover" />
+                  <Image src={s.image} alt={s.title} fill sizes="(max-width:1024px) 100vw, 50vw" className="object-cover" />
                 </div>
                 <div className={`p-7 sm:p-9 ${i % 2 === 1 ? "lg:order-1" : ""}`}>
                   <span className="text-sm font-bold text-[#c9a14a]">{String(i + 1).padStart(2, "0")}</span>

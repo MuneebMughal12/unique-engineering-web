@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { isAuthenticated } from "@/lib/auth";
 import { adminGetProject, adminUpdateProject, adminDeleteProject } from "@/lib/projects-admin";
 import { Project } from "@/lib/models";
+import { revalidatePath } from "next/cache";
 
 type Ctx = { params: Promise<{ slug: string }> };
 
@@ -32,6 +33,9 @@ export async function PUT(req: NextRequest, ctx: Ctx) {
   }
   try {
     await adminUpdateProject(slug, patch);
+    revalidatePath("/");
+    revalidatePath("/projects");
+    revalidatePath(`/projects/${slug}`);
     return NextResponse.json({ ok: true });
   } catch (e) {
     return NextResponse.json({ error: msg(e) }, { status: 400 });
@@ -45,6 +49,8 @@ export async function DELETE(_req: NextRequest, ctx: Ctx) {
   const { slug } = await ctx.params;
   try {
     await adminDeleteProject(slug);
+    revalidatePath("/");
+    revalidatePath("/projects");
     return NextResponse.json({ ok: true });
   } catch (e) {
     return NextResponse.json({ error: msg(e) }, { status: 400 });

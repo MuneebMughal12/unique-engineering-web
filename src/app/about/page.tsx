@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { company } from "@/data/company";
 import { valueCards } from "@/data/site-content";
-import { ceo } from "@/data/team";
+import { getSiteSettings, getTeamMembers } from "@/lib/content-repo";
 import HowWeWork from "@/components/home/HowWeWork";
 import TeamSection from "@/components/home/TeamSection";
 import TestimonialsLight from "@/components/home/TestimonialsLight";
@@ -15,7 +15,8 @@ export const metadata = buildPageMetadata({
   path: "/about",
 });
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const [settings, team] = await Promise.all([getSiteSettings(), getTeamMembers()]);
   return (
     <>
       <section className="relative overflow-hidden bg-white pb-20 pt-32 sm:pb-24 sm:pt-40">
@@ -86,37 +87,37 @@ export default function AboutPage() {
             <div className="absolute -bottom-5 -left-5 h-40 w-40 bg-[#c9a14a]" />
             <div className="relative aspect-[4/5] overflow-hidden bg-[#e8ebef] shadow-[0_20px_60px_rgba(20,24,31,.16)]">
               <Image
-                src={ceo.photo}
-                alt={`${ceo.name}, ${ceo.role}`}
+                src={settings.ceoPhoto}
+                alt={`${settings.ceoName}, ${settings.ceoRole}`}
                 fill
                 sizes="(max-width:1024px) 100vw, 38vw"
                 className="object-cover"
               />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#101923]/90 via-[#101923]/35 to-transparent px-6 pb-7 pt-20 text-white">
-                <p className="text-xl font-bold">{ceo.name}</p>
-                <p className="mt-1 text-sm text-[#e1c77e]">{ceo.role}</p>
+                <p className="text-xl font-bold">{settings.ceoName}</p>
+                <p className="mt-1 text-sm text-[#e1c77e]">{settings.ceoRole}</p>
               </div>
             </div>
           </div>
 
           <div>
             <p className="eyebrow">Leadership Message</p>
-            <h2 className="heading mt-4 text-4xl sm:text-5xl">Message from the CEO</h2>
+            <h2 className="heading mt-4 text-4xl sm:text-5xl">{settings.ceoHeading}</h2>
             <div className="gold-rule mt-6" />
             <span className="mt-7 block font-serif text-7xl leading-none text-[#c9a14a]/35" aria-hidden>“</span>
             <blockquote className="-mt-5 max-w-2xl text-lg leading-[1.9] text-[#505965] sm:text-xl">
-              {ceo.message}
+              {settings.ceoMessage}
             </blockquote>
             <div className="mt-8 border-t border-[#e4e7eb] pt-6">
-              <p className="text-lg font-bold text-[#14181f]">{ceo.name}</p>
-              <p className="mt-1 text-sm font-medium text-[#c9a14a]">{ceo.role}, {company.name}</p>
+              <p className="text-lg font-bold text-[#14181f]">{settings.ceoName}</p>
+              <p className="mt-1 text-sm font-medium text-[#c9a14a]">{settings.ceoRole}, {company.name}</p>
             </div>
           </div>
         </div>
       </section>
 
       <HowWeWork />
-      <TeamSection />
+      <TeamSection team={team} />
       <TestimonialsLight />
     </>
   );

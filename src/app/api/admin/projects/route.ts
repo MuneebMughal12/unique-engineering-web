@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { isAuthenticated } from "@/lib/auth";
 import { adminListProjects, adminCreateProject } from "@/lib/projects-admin";
 import { Project } from "@/lib/models";
+import { revalidatePath } from "next/cache";
 
 export async function GET() {
   if (!(await isAuthenticated())) {
@@ -30,6 +31,8 @@ export async function POST(req: NextRequest) {
   }
   try {
     await adminCreateProject(body);
+    revalidatePath("/");
+    revalidatePath("/projects");
     return NextResponse.json({ ok: true });
   } catch (e) {
     return NextResponse.json({ error: msg(e) }, { status: 400 });

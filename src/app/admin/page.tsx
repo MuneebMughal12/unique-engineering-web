@@ -20,6 +20,8 @@ export default async function AdminPage() {
     cover: p.cover,
     phaseCount: p.phases.length,
     progress: computeProgress(p.phases),
+    featured: Boolean(p.featured),
+    showInHero: Boolean(p.showInHero),
   }));
 
   return (

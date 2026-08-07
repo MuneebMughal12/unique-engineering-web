@@ -1,6 +1,6 @@
 import Image from "next/image";
 import PageHeader from "@/components/PageHeader";
-import { team, ceo } from "@/data/team";
+import { getSiteSettings, getTeamMembers } from "@/lib/content-repo";
 import { buildPageMetadata } from "@/lib/seo";
 
 export const metadata = buildPageMetadata({
@@ -9,7 +9,8 @@ export const metadata = buildPageMetadata({
   path: "/team",
 });
 
-export default function TeamPage() {
+export default async function TeamPage() {
+  const [team, settings] = await Promise.all([getTeamMembers(), getSiteSettings()]);
   return (
     <>
       <PageHeader title="Our Team" crumb="Team" />
@@ -18,16 +19,16 @@ export default function TeamPage() {
       <section className="bg-white py-16 sm:py-20">
         <div className="mx-auto grid max-w-[1300px] items-center gap-12 px-5 sm:px-8 lg:grid-cols-[0.8fr_1.2fr]">
           <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-[#f5f7fa] card-shadow">
-            <Image src={ceo.photo} alt={ceo.name} fill sizes="(max-width:1024px) 100vw, 40vw" className="object-cover" />
+            <Image src={settings.ceoPhoto} alt={settings.ceoName} fill sizes="(max-width:1024px) 100vw, 40vw" className="object-cover" />
           </div>
           <div>
             <p className="eyebrow">Message from the CEO</p>
-            <h2 className="heading mt-3 text-3xl sm:text-4xl">Building trust, one home at a time</h2>
+            <h2 className="heading mt-3 text-3xl sm:text-4xl">{settings.ceoHeading}</h2>
             <div className="gold-rule mt-5" />
-            <p className="mt-6 text-lg leading-relaxed text-[#444b54]">&ldquo;{ceo.message}&rdquo;</p>
+            <p className="mt-6 text-lg leading-relaxed text-[#444b54]">&ldquo;{settings.ceoMessage}&rdquo;</p>
             <div className="mt-6">
-              <p className="text-lg font-bold text-[#14181f]">{ceo.name}</p>
-              <p className="text-sm font-medium text-[#c9a14a]">{ceo.role}</p>
+              <p className="text-lg font-bold text-[#14181f]">{settings.ceoName}</p>
+              <p className="text-sm font-medium text-[#c9a14a]">{settings.ceoRole}</p>
             </div>
           </div>
         </div>
@@ -56,9 +57,6 @@ export default function TeamPage() {
               </div>
             ))}
           </div>
-          <p className="mt-8 text-center text-xs text-[#b0b6bd]">
-            Demo build — placeholder team. Replace with real members and photos.
-          </p>
         </div>
       </section>
     </>

@@ -29,6 +29,8 @@ const empty: Project = {
   images: [],
   status: "completed",
   phases: [],
+  featured: false,
+  showInHero: false,
 };
 
 export default function ProjectForm({ initial }: { initial?: Project }) {
@@ -141,6 +143,17 @@ export default function ProjectForm({ initial }: { initial?: Project }) {
           <input className={`${field} mt-2`} value={p.tags.join(", ")}
             onChange={(e) => set("tags", e.target.value.split(",").map((t) => t.trim()).filter(Boolean))}
             placeholder="Design, Grey Structure, Turnkey" />
+        </div>
+
+        <div className="grid gap-3 sm:grid-cols-2">
+          <label className="flex cursor-pointer items-start gap-3 rounded-sm border border-[#242424] bg-[#0f0f0f] p-4">
+            <input type="checkbox" checked={Boolean(p.featured)} onChange={(e) => set("featured", e.target.checked)} className="mt-1 accent-[#d2a24c]" />
+            <span><span className="block text-sm font-medium">Pin on home page</span><span className="mt-1 block text-xs text-[#777]">Show this project in Featured Projects.</span></span>
+          </label>
+          <label className="flex cursor-pointer items-start gap-3 rounded-sm border border-[#242424] bg-[#0f0f0f] p-4">
+            <input type="checkbox" checked={Boolean(p.showInHero)} onChange={(e) => set("showInHero", e.target.checked)} className="mt-1 accent-[#d2a24c]" />
+            <span><span className="block text-sm font-medium">Show in hero slider</span><span className="mt-1 block text-xs text-[#777]">Use the project cover image in the home hero.</span></span>
+          </label>
         </div>
 
         <div>

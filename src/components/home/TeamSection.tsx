@@ -3,9 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "motion/react";
-import { team } from "@/data/team";
+import type { TeamMember } from "@/lib/models";
 
-export default function TeamSection() {
+export default function TeamSection({ team }: { team: TeamMember[] }) {
   return (
     <section className="bg-white py-20 sm:py-24">
       <div className="mx-auto max-w-[1300px] px-5 sm:px-8">

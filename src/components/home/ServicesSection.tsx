@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "motion/react";
-import { services } from "@/data/services";
+import type { ManagedService } from "@/lib/models";
 
 const serviceIcons = [
   <path key="a" d="M4 20V8l8-5 8 5v12M8 20v-6h8v6M9 9h6" />,
@@ -13,7 +13,7 @@ const serviceIcons = [
   <path key="f" d="M4 20h16M6 20V7l6-3 6 3v13M9 10h6M9 14h6" />,
 ];
 
-export default function ServicesSection() {
+export default function ServicesSection({ services }: { services: ManagedService[] }) {
   return (
     <section className="bg-[#f6f8fa] py-20 sm:py-24">
       <div className="mx-auto max-w-[1300px] px-5 sm:px-8">
@@ -41,7 +41,7 @@ export default function ServicesSection() {
               <div className="flex items-start justify-between">
                 <span className="flex h-11 w-11 items-center justify-center rounded-sm bg-[#f1f4f7] text-[#2c3e63] transition-colors group-hover:bg-white/10 group-hover:text-[#d8b96e]">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-                    {serviceIcons[index]}
+                    {serviceIcons[index % serviceIcons.length]}
                   </svg>
                 </span>
                 <span className="text-xs font-bold tracking-[0.16em] text-[#b48a32] group-hover:text-[#d8b96e]">{String(index + 1).padStart(2, "0")}</span>

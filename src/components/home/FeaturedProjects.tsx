@@ -8,7 +8,8 @@ import ProjectCard from "@/components/projects/ProjectCard";
 
 export default function FeaturedProjects({ projects }: { projects: Project[] }) {
   const [filter, setFilter] = useState<Category | "All">("All");
-  const list = (filter === "All" ? projects : projects.filter((p) => p.category === filter)).slice(0, 6);
+  const pinned = projects.some((p) => p.featured) ? projects.filter((p) => p.featured) : projects;
+  const list = (filter === "All" ? pinned : pinned.filter((p) => p.category === filter)).slice(0, 6);
 
   return (
     <section className="bg-[#f5f7fa] py-20 sm:py-24">

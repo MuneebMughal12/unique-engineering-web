@@ -31,9 +31,38 @@ export type Project = {
   images: string[];
   status: ProjectStatus;
   phases: Phase[];
+  featured?: boolean;
+  showInHero?: boolean;
   order?: number;
   createdAt?: string;
   updatedAt?: string;
+};
+
+export type TeamMember = {
+  slug: string;
+  name: string;
+  role: string;
+  photo: string;
+  bio?: string;
+  order?: number;
+};
+
+export type ManagedService = {
+  slug: string;
+  title: string;
+  blurb: string;
+  points: string[];
+  image: string;
+  order?: number;
+};
+
+export type SiteSettings = {
+  key: "main";
+  ceoName: string;
+  ceoRole: string;
+  ceoPhoto: string;
+  ceoHeading: string;
+  ceoMessage: string;
 };
 
 export const CATEGORIES: Category[] = [
