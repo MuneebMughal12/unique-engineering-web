@@ -39,7 +39,8 @@ export async function getTeamMembers(): Promise<TeamMember[]> {
   if (isDbConfigured()) {
     const db = await getDb();
     const docs = await db?.collection<TeamMember>("teamMembers").find({}, { projection: { _id: 0 } }).sort({ order: 1 }).toArray();
-    if (docs?.length) return docs;
+    const seeded = await db?.collection("cmsMeta").findOne({ key: "seeded:teamMembers" });
+    if (docs?.length || seeded) return docs ?? [];
   }
   return defaultTeam;
 }
@@ -48,7 +49,8 @@ export async function getServices(): Promise<ManagedService[]> {
   if (isDbConfigured()) {
     const db = await getDb();
     const docs = await db?.collection<ManagedService>("services").find({}, { projection: { _id: 0 } }).sort({ order: 1 }).toArray();
-    if (docs?.length) return docs;
+    const seeded = await db?.collection("cmsMeta").findOne({ key: "seeded:services" });
+    if (docs?.length || seeded) return docs ?? [];
   }
   return defaultServices;
 }

@@ -3,6 +3,7 @@ import { revalidatePath } from "next/cache";
 import { isAuthenticated } from "@/lib/auth";
 import { adminDeleteTeam, adminListTeam, adminSaveTeam } from "@/lib/content-admin";
 import type { TeamMember } from "@/lib/models";
+import { touchContentVersion } from "@/lib/content-version";
 
 async function allowed() { return isAuthenticated(); }
 function refresh() { revalidatePath("/"); revalidatePath("/team"); revalidatePath("/about"); }
@@ -17,13 +18,13 @@ export async function POST(req: NextRequest) {
   if (!(await allowed())) return NextResponse.json({ error: "Not authorized." }, { status: 401 });
   const { item, originalSlug } = await req.json() as { item: TeamMember; originalSlug?: string };
   if (!item?.slug || !item.name || !item.role || !item.photo) return NextResponse.json({ error: "Name, role and photo are required." }, { status: 400 });
-  await adminSaveTeam(item, originalSlug); refresh();
+  await adminSaveTeam(item, originalSlug); await touchContentVersion(); refresh();
   return NextResponse.json({ ok: true });
 }
 
 export async function DELETE(req: NextRequest) {
   if (!(await allowed())) return NextResponse.json({ error: "Not authorized." }, { status: 401 });
   const { slug } = await req.json() as { slug: string };
-  await adminDeleteTeam(slug); refresh();
+  await adminDeleteTeam(slug); await touchContentVersion(); refresh();
   return NextResponse.json({ ok: true });
 }

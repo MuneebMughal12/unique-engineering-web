@@ -24,7 +24,7 @@ const demoPhases: Phase[] = [
   { name: "Handover", status: "upcoming", percent: 0, images: [] },
 ];
 
-function seedAsProjects(): Project[] {
+export function seedAsProjects(): Project[] {
   return seed.map((p, i) => ({
     ...p,
     status: i === 0 ? "ongoing" : "completed",
@@ -42,7 +42,8 @@ export async function getProjects(): Promise<Project[]> {
         .find({}, { projection: { _id: 0 } })
         .sort({ order: 1, createdAt: -1 })
         .toArray();
-      if (docs.length) return docs;
+      const seeded = await db.collection("cmsMeta").findOne({ key: "seeded:projects" });
+      if (docs.length || seeded) return docs;
     }
   }
   return seedAsProjects();

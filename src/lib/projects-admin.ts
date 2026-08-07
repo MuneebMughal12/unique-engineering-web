@@ -1,5 +1,6 @@
 import { getDb } from "./mongodb";
 import { Project } from "./models";
+import { seedAsProjects } from "./projects-repo";
 
 /** Write operations used by the admin panel. These require MongoDB. */
 
@@ -13,6 +14,17 @@ async function db() {
 
 export async function adminListProjects(): Promise<Project[]> {
   const d = await db();
+  const marker = await d.collection("cmsMeta").findOne({ key: "seeded:projects" });
+  if (!marker && (await d.collection(COLLECTION).countDocuments()) === 0) {
+    await d.collection<Project>(COLLECTION).insertMany(seedAsProjects());
+  }
+  if (!marker) {
+    await d.collection("cmsMeta").updateOne(
+      { key: "seeded:projects" },
+      { $set: { key: "seeded:projects", seededAt: new Date().toISOString() } },
+      { upsert: true },
+    );
+  }
   return d
     .collection<Project>(COLLECTION)
     .find({}, { projection: { _id: 0 } })

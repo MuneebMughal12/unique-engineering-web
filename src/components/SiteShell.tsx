@@ -5,6 +5,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import LiveContentRefresh from "@/components/LiveContentRefresh";
 
 /**
  * Public site chrome wraps every page except the admin panel, which uses its
@@ -21,6 +22,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
   return (
     <>
       <SmoothScroll />
+      <LiveContentRefresh />
       <Nav />
       <main>{children}</main>
       <Footer />

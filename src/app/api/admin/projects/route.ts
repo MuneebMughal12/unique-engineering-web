@@ -3,6 +3,7 @@ import { isAuthenticated } from "@/lib/auth";
 import { adminListProjects, adminCreateProject } from "@/lib/projects-admin";
 import { Project } from "@/lib/models";
 import { revalidatePath } from "next/cache";
+import { touchContentVersion } from "@/lib/content-version";
 
 export async function GET() {
   if (!(await isAuthenticated())) {
@@ -31,6 +32,7 @@ export async function POST(req: NextRequest) {
   }
   try {
     await adminCreateProject(body);
+    await touchContentVersion();
     revalidatePath("/");
     revalidatePath("/projects");
     return NextResponse.json({ ok: true });

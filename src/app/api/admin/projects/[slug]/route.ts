@@ -3,6 +3,7 @@ import { isAuthenticated } from "@/lib/auth";
 import { adminGetProject, adminUpdateProject, adminDeleteProject } from "@/lib/projects-admin";
 import { Project } from "@/lib/models";
 import { revalidatePath } from "next/cache";
+import { touchContentVersion } from "@/lib/content-version";
 
 type Ctx = { params: Promise<{ slug: string }> };
 
@@ -33,6 +34,7 @@ export async function PUT(req: NextRequest, ctx: Ctx) {
   }
   try {
     await adminUpdateProject(slug, patch);
+    await touchContentVersion();
     revalidatePath("/");
     revalidatePath("/projects");
     revalidatePath(`/projects/${slug}`);
@@ -49,6 +51,7 @@ export async function DELETE(_req: NextRequest, ctx: Ctx) {
   const { slug } = await ctx.params;
   try {
     await adminDeleteProject(slug);
+    await touchContentVersion();
     revalidatePath("/");
     revalidatePath("/projects");
     return NextResponse.json({ ok: true });
