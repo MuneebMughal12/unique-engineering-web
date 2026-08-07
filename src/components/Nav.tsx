@@ -19,9 +19,20 @@ const links = [
 export default function Nav() {
   const path = usePathname();
   const [open, setOpen] = useState(false);
-  const transparentHomeNav = path === "/" && !open;
+  const [scrolled, setScrolled] = useState(false);
+  const transparentHomeNav = path === "/" && !scrolled && !open;
 
   useEffect(() => setOpen(false), [path]);
+
+  useEffect(() => {
+    const updateNavBackground = () => {
+      setScrolled(window.scrollY > 24);
+    };
+
+    updateNavBackground();
+    window.addEventListener("scroll", updateNavBackground, { passive: true });
+    return () => window.removeEventListener("scroll", updateNavBackground);
+  }, [path]);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
