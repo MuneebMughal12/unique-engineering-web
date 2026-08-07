@@ -20,6 +20,7 @@ export default function Nav() {
   const path = usePathname();
   const [open, setOpen] = useState(false);
   const [solid, setSolid] = useState(false);
+  const transparentAtTop = path === "/" && !solid && !open;
 
   useEffect(() => setOpen(false), [path]);
 
@@ -41,7 +42,9 @@ export default function Nav() {
     <>
       <header
         className={`fixed inset-x-0 top-0 z-[500] transition-all duration-300 ${
-          solid ? "bg-white/95 shadow-[0_1px_20px_rgba(20,24,31,0.08)] backdrop-blur" : "bg-white"
+          transparentAtTop
+            ? "bg-transparent shadow-none"
+            : "bg-white/95 shadow-[0_1px_20px_rgba(20,24,31,0.08)] backdrop-blur-xl"
         }`}
       >
         <div className="mx-auto flex max-w-[1300px] items-center justify-between gap-4 px-5 py-3.5 sm:px-8">
