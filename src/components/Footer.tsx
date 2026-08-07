@@ -43,7 +43,7 @@ export default function Footer() {
       <div className="mx-auto grid max-w-[1300px] gap-10 px-5 py-14 sm:px-8 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
         <div>
           <Link href="/" className="relative block h-[120px] w-[126px] overflow-hidden rounded-sm bg-[#242321]" aria-label="Bricks N Builders home">
-            <Image src="/img/bricks-n-builders-logo.jpeg" alt="Bricks N Builders" fill sizes="126px" className="object-contain" />
+            <Image src="/img/bricks-n-builders-logo.png" alt="Bricks N Builders" fill sizes="126px" className="object-contain" />
           </Link>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-[#8a929c]">
             A Rawalpindi-based design and construction company delivering homes and commercial

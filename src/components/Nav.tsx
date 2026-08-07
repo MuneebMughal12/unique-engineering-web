@@ -46,7 +46,7 @@ export default function Nav() {
       >
         <div className="mx-auto flex max-w-[1300px] items-center justify-between gap-4 px-5 py-3.5 sm:px-8">
           <Link href="/" className="relative h-[62px] w-[66px] shrink-0 overflow-hidden rounded-sm bg-[#242321] sm:h-[68px] sm:w-[72px]" aria-label="Bricks N Builders home">
-            <Image src="/img/bricks-n-builders-logo.jpeg" alt="Bricks N Builders" fill sizes="72px" priority className="object-contain" />
+            <Image src="/img/bricks-n-builders-logo.png" alt="Bricks N Builders" fill sizes="72px" priority className="object-contain" />
           </Link>
 
           {/* desktop */}
