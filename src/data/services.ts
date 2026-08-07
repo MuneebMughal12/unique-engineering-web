@@ -11,14 +11,27 @@ export const services: Service[] = [
     title: "Architectural Design & Drawings",
     blurb:
       "2D drawings and 3D elevations that turn your plot and requirements into a buildable home or commercial design — before a single brick is laid.",
-    points: ["2D floor plans", "3D front elevations", "Structural drawings", "Working drawings"],
+    points: [
+      "Architectural drawings",
+      "Structural drawings",
+      "3D elevations",
+      "Electrical drawings",
+      "Plumbing drawings",
+    ],
   },
   {
     slug: "map-approval",
     title: "Map Approval",
     blurb:
-      "We handle the paperwork and follow-up to get your building map approved from the housing society or TMA, so you can start construction without the runaround.",
-    points: ["Society approval", "TMA / RDA approval", "Documentation", "Follow-up & submission"],
+      "We prepare, submit and follow up your building plans for approval from the concerned development, municipal or cantonment authority.",
+    points: [
+      "CDA map approval",
+      "RDA map approval",
+      "TMA map approval",
+      "District Council map approval",
+      "Cantonment Board map approval",
+      "Submission and approval from concerned authority",
+    ],
   },
   {
     slug: "grey-structure",
