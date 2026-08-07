@@ -19,17 +19,9 @@ const links = [
 export default function Nav() {
   const path = usePathname();
   const [open, setOpen] = useState(false);
-  const [solid, setSolid] = useState(false);
-  const transparentAtTop = path === "/" && !solid && !open;
+  const transparentHomeNav = path === "/" && !open;
 
   useEffect(() => setOpen(false), [path]);
-
-  useEffect(() => {
-    const onScroll = () => setSolid(window.scrollY > 30);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -42,7 +34,7 @@ export default function Nav() {
     <>
       <header
         className={`fixed inset-x-0 top-0 z-[500] transition-all duration-300 ${
-          transparentAtTop
+          transparentHomeNav
             ? "bg-transparent shadow-none"
             : "bg-white/95 shadow-[0_1px_20px_rgba(20,24,31,0.08)] backdrop-blur-xl"
         }`}
