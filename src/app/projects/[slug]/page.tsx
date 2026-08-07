@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ProjectDetail from "@/components/projects/ProjectDetail";
 import { getProjects } from "@/lib/projects-repo";
+import { buildPageMetadata } from "@/lib/seo";
 
 // Revalidate so admin changes appear without a redeploy.
 export const revalidate = 60;
@@ -14,11 +15,12 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = (await getProjects()).find((p) => p.slug === slug);
   if (!project) return { title: "Project not found" };
-  return {
+  return buildPageMetadata({
     title: project.title,
     description: project.summary,
-    openGraph: { images: project.cover ? [project.cover] : [] },
-  };
+    path: `/projects/${project.slug}`,
+    image: project.cover || undefined,
+  });
 }
 
 export default async function ProjectPage({

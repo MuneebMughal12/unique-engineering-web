@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
 import ContactForm from "@/components/ContactForm";
 import { company } from "@/data/company";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Contact Us",
+export const metadata = buildPageMetadata({
+  title: "Contact Bricks N Builders",
   description:
-    "Get in touch with Bricks N Builders — offices in Rehbar Housing Society (Chakri Road) and Dhamial Road, Rawalpindi.",
-};
+    "Contact Bricks N Builders for design, map approval and construction services in Rawalpindi and Islamabad. Offices on Chakri Road and Dhamial Road.",
+  path: "/contact",
+});
 
 export default function ContactPage() {
   const wa = `https://wa.me/${company.whatsapp}?text=${encodeURIComponent(company.whatsappMessage)}`;

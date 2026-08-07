@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
 import ProjectGrid from "@/components/projects/ProjectGrid";
 import { getProjects } from "@/lib/projects-repo";
+import { buildPageMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
 
-export const metadata: Metadata = {
-  title: "Projects",
+export const metadata = buildPageMetadata({
+  title: "Construction Projects",
   description:
     "Homes, commercial and mixed-use projects designed and built by Bricks N Builders across Rawalpindi and Islamabad.",
-};
+  path: "/projects",
+});
 
 export default async function ProjectsPage() {
   const projects = await getProjects();

@@ -68,7 +68,7 @@ export const company = {
   ],
 
   email: "bricksnbuilders1@gmail.com",
-  website: "",
+  website: "https://www.bricksnbuilders.com",
   whatsapp: "923135350050",
   whatsappMessage:
     "Assalam o Alaikum, mujhe Bricks N Builders ki design, construction aur map approval services ke baare mein maloomat chahiye.",

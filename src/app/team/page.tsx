@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import PageHeader from "@/components/PageHeader";
 import { team, ceo } from "@/data/team";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Our Team",
-  description: "Meet the Bricks N Builders team — experienced engineers, architects and site professionals.",
-};
+  description: "Meet the Bricks N Builders team of experienced engineers, architects and construction site professionals in Rawalpindi.",
+  path: "/team",
+});
 
 export default function TeamPage() {
   return (

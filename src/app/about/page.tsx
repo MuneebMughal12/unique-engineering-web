@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { company } from "@/data/company";
@@ -7,12 +6,14 @@ import { ceo } from "@/data/team";
 import HowWeWork from "@/components/home/HowWeWork";
 import TeamSection from "@/components/home/TeamSection";
 import TestimonialsLight from "@/components/home/TestimonialsLight";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "About Us",
+export const metadata = buildPageMetadata({
+  title: "About Our Construction Company",
   description:
-    "Bricks N Builders — a Rawalpindi-based design and construction company offering architectural design, map approval, construction and turnkey handover.",
-};
+    "Learn about Bricks N Builders, a Rawalpindi-based construction company offering architectural design, map approval, construction and turnkey handover.",
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (

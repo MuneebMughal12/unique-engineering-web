@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import { services } from "@/data/services";
 import { processSteps } from "@/data/site-content";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Services",
+export const metadata = buildPageMetadata({
+  title: "Construction & Architectural Services",
   description:
-    "Architectural design, map approval, grey structure, finishing and turnkey, renovation and interior design — by Bricks N Builders, Rawalpindi.",
-};
+    "Architectural design, map approval, grey structure, finishing, turnkey construction, renovation and interior design in Rawalpindi and Islamabad.",
+  path: "/services",
+});
 
 const covers = [
   "/img/survey-setout.jpg",
