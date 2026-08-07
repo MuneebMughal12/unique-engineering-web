@@ -53,8 +53,8 @@ export default function DashboardClient({
       <header className="sticky top-0 z-10 border-b border-[#1f1f1f] bg-[#0a0a0a]/90 backdrop-blur">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-4">
           <div className="flex items-center gap-3">
-            <div className="relative h-14 w-14 overflow-hidden rounded-sm bg-[#242321]">
-              <Image src="/img/bricks-n-builders-logo.png" alt="Bricks N Builders" fill sizes="56px" priority className="object-contain" />
+            <div className="relative h-[72px] w-[72px] overflow-hidden rounded-sm bg-[#242321]">
+              <Image src="/img/bricks-n-builders-logo-v2.png" alt="Bricks N Builders" fill sizes="72px" priority className="object-contain" />
             </div>
             <p className="text-[10px] tracking-[0.2em] text-[#8a8a8a]">ADMIN PANEL</p>
           </div>
