@@ -45,8 +45,8 @@ export default function Nav() {
         }`}
       >
         <div className="mx-auto flex max-w-[1300px] items-center justify-between gap-4 px-5 py-3.5 sm:px-8">
-          <Link href="/" className="relative h-[74px] w-[74px] shrink-0 overflow-hidden rounded-sm bg-[#242321] sm:h-[88px] sm:w-[88px]" aria-label="Bricks N Builders home">
-            <Image src="/img/bricks-n-builders-logo-v2.png" alt="Bricks N Builders" fill sizes="88px" priority className="object-contain" />
+          <Link href="/" className="relative h-[74px] w-[74px] shrink-0 sm:h-[88px] sm:w-[88px]" aria-label="Bricks N Builders home">
+            <Image src="/img/logo.png" alt="Bricks N Builders" fill sizes="88px" priority className="object-contain" />
           </Link>
 
           {/* desktop */}

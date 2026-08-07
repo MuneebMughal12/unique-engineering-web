@@ -32,8 +32,8 @@ export const metadata: Metadata = {
     type: "website",
   },
   icons: {
-    icon: "/img/bricks-n-builders-logo-v2.png",
-    apple: "/img/bricks-n-builders-logo-v2.png",
+    icon: "/img/logo.png",
+    apple: "/img/logo.png",
   },
 };
 
