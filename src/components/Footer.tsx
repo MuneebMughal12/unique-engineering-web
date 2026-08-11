@@ -106,6 +106,14 @@ export default function Footer() {
         <div className="mx-auto max-w-[1300px] px-5 py-5 text-xs text-[#6a727e] sm:px-8">
           © {new Date().getFullYear()} {company.legalName}. All rights reserved.
         </div>
+        <div className="mx-auto max-w-[1300px] border-t border-white/5 px-5 py-4 text-xs text-[#6a727e] sm:px-8 sm:text-right">
+          Website designed &amp; developed by{" "}
+          <span className="font-semibold text-[#c9a14a]">VizoTech</span>
+          <span className="mx-2 text-white/20">•</span>
+          <a href="mailto:vizotech.official@gmail.com" className="transition-colors hover:text-[#c9a14a]">
+            vizotech.official@gmail.com
+          </a>
+        </div>
       </div>
     </footer>
   );
