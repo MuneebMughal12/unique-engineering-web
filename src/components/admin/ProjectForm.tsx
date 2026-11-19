@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Project, Category, CATEGORIES, ProjectStatus, makeDefaultPhases } from "@/lib/models";
 import ImageUploader from "./ImageUploader";
+import VideoUploader from "./VideoUploader";
 import PhasesEditor from "./PhasesEditor";
 
 function slugify(s: string) {
@@ -27,6 +28,7 @@ const empty: Project = {
   scope: [],
   cover: "",
   images: [],
+  videos: [],
   status: "completed",
   phases: [],
   featured: false,
@@ -36,7 +38,15 @@ const empty: Project = {
 export default function ProjectForm({ initial }: { initial?: Project }) {
   const router = useRouter();
   const isEdit = Boolean(initial);
-  const [p, setP] = useState<Project>(initial ?? empty);
+  const [p, setP] = useState<Project>(() =>
+    initial
+      ? {
+          ...initial,
+          videos: initial.videos ?? [],
+          phases: initial.phases.map((phase) => ({ ...phase, videos: phase.videos ?? [] })),
+        }
+      : empty,
+  );
   const [slugTouched, setSlugTouched] = useState(isEdit);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -177,12 +187,20 @@ export default function ProjectForm({ initial }: { initial?: Project }) {
         <ImageUploader value={p.images} onChange={(images) => set("images", images)} />
       </section>
 
+      <section className="space-y-3">
+        <h2 className="text-lg font-semibold">Videos</h2>
+        <p className="text-xs text-[#6a6a6a]">
+          Videos appear with the project photos and play automatically without sound.
+        </p>
+        <VideoUploader value={p.videos ?? []} onChange={(videos) => set("videos", videos)} />
+      </section>
+
       {/* phases */}
       {p.status === "ongoing" && (
         <section className="space-y-3">
           <h2 className="text-lg font-semibold">Construction phases</h2>
           <p className="text-xs text-[#6a6a6a]">
-            Mark phases complete and add photos as work progresses. The overall percentage
+            Mark phases complete and add photos or videos as work progresses. The overall percentage
             updates automatically on the public page.
           </p>
           <PhasesEditor phases={p.phases} onChange={(phases) => set("phases", phases)} />

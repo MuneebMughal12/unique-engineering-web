@@ -49,3 +49,14 @@ export async function uploadImage(
     stream.end(buffer);
   });
 }
+
+/** Signed parameters used by the browser for direct Cloudinary video uploads. */
+export function createVideoUploadSignature(folder = "bricksnbuilders/videos") {
+  if (!isCloudinaryConfigured() || !cloudName || !apiKey || !apiSecret) {
+    throw new Error("Cloudinary is not configured. Add CLOUDINARY_* to the environment.");
+  }
+  ensureConfigured();
+  const timestamp = Math.floor(Date.now() / 1000);
+  const signature = cloudinary.utils.api_sign_request({ timestamp, folder }, apiSecret);
+  return { cloudName, apiKey, timestamp, folder, signature };
+}

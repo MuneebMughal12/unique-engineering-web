@@ -71,11 +71,25 @@ export default function ProgressTracker({ phases }: { phases: Phase[] }) {
                   </div>
                 )}
 
-                {phase.images.length > 0 && (
+                {(phase.images.length > 0 || (phase.videos?.length ?? 0) > 0) && (
                   <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
                     {phase.images.map((src, j) => (
                       <div key={j} className="relative aspect-[4/3] overflow-hidden rounded-lg">
                         <Image src={src} alt={`${phase.name} photo`} fill sizes="200px" className="object-cover" unoptimized />
+                      </div>
+                    ))}
+                    {(phase.videos ?? []).map((src, j) => (
+                      <div key={`video-${j}`} className="relative aspect-[4/3] overflow-hidden rounded-lg bg-black">
+                        <video
+                          src={src}
+                          autoPlay
+                          muted
+                          loop
+                          playsInline
+                          preload="metadata"
+                          className="h-full w-full object-cover"
+                        />
+                        <span className="absolute bottom-2 left-2 rounded bg-black/70 px-2 py-1 text-[9px] font-semibold text-white">VIDEO</span>
                       </div>
                     ))}
                   </div>

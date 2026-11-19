@@ -12,6 +12,7 @@ export type Phase = {
   percent: number; // 0–100 for the active phase
   note?: string;
   images: string[];
+  videos?: string[];
   completedAt?: string; // ISO date
 };
 
@@ -29,6 +30,7 @@ export type Project = {
   scope: string[];
   cover: string;
   images: string[];
+  videos?: string[];
   status: ProjectStatus;
   phases: Phase[];
   featured?: boolean;
@@ -101,5 +103,6 @@ export function makeDefaultPhases(): Phase[] {
     status: i === 0 ? "active" : "upcoming",
     percent: 0,
     images: [],
+    videos: [],
   }));
 }

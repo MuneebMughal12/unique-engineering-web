@@ -17,7 +17,12 @@ export default function ProjectDetail({
   next: Project;
 }) {
   const [active, setActive] = useState(0);
-  const img = project.images[active] ?? project.cover;
+  const images = project.images.length > 0 ? project.images : project.cover ? [project.cover] : [];
+  const media = [
+    ...images.map((url) => ({ type: "image" as const, url })),
+    ...(project.videos ?? []).map((url) => ({ type: "video" as const, url })),
+  ];
+  const selected = media[active] ?? media[0];
 
   return (
     <>
@@ -42,18 +47,40 @@ export default function ProjectDetail({
         <div className="mx-auto grid max-w-[1300px] gap-10 px-5 sm:px-8 lg:grid-cols-[1.4fr_0.8fr]">
           <div>
             <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-[#f5f7fa] card-shadow">
-              <motion.div key={img} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }} className="absolute inset-0">
-                <Image src={img} alt={project.title} fill priority sizes="(max-width:1024px) 100vw, 60vw" className="object-cover" />
-              </motion.div>
+              {selected && (
+                <motion.div key={`${selected.type}-${selected.url}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }} className="absolute inset-0">
+                  {selected.type === "image" ? (
+                    <Image src={selected.url} alt={project.title} fill priority sizes="(max-width:1024px) 100vw, 60vw" className="object-cover" />
+                  ) : (
+                    <video
+                      src={selected.url}
+                      poster={project.cover || undefined}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                      className="h-full w-full object-cover"
+                    />
+                  )}
+                </motion.div>
+              )}
             </div>
             <div className="mt-4 flex gap-3 overflow-x-auto">
-              {project.images.map((src, i) => (
+              {media.map((item, i) => (
                 <button
-                  key={src + i}
+                  key={`${item.type}-${item.url}-${i}`}
                   onClick={() => setActive(i)}
                   className={`relative h-16 w-24 shrink-0 overflow-hidden rounded-lg border-2 transition-all ${i === active ? "border-[#c9a14a]" : "border-transparent opacity-60 hover:opacity-100"}`}
                 >
-                  <Image src={src} alt="" fill sizes="96px" className="object-cover" />
+                  {item.type === "image" ? (
+                    <Image src={item.url} alt="" fill sizes="96px" className="object-cover" />
+                  ) : (
+                    <>
+                      <video src={item.url} muted playsInline preload="metadata" className="h-full w-full object-cover" />
+                      <span className="absolute bottom-1 left-1 rounded bg-black/70 px-1.5 py-0.5 text-[9px] font-semibold text-white">VIDEO</span>
+                    </>
+                  )}
                 </button>
               ))}
             </div>

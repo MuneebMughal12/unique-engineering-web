@@ -2,6 +2,7 @@
 
 import { Phase, PhaseStatus } from "@/lib/models";
 import ImageUploader from "./ImageUploader";
+import VideoUploader from "./VideoUploader";
 
 const STATUS: { value: PhaseStatus; label: string }[] = [
   { value: "upcoming", label: "Upcoming" },
@@ -23,7 +24,7 @@ export default function PhasesEditor({
     onChange(phases.filter((_, idx) => idx !== i));
   }
   function add() {
-    onChange([...phases, { name: "New phase", status: "upcoming", percent: 0, images: [] }]);
+    onChange([...phases, { name: "New phase", status: "upcoming", percent: 0, images: [], videos: [] }]);
   }
   function move(i: number, dir: -1 | 1) {
     const j = i + dir;
@@ -93,6 +94,13 @@ export default function PhasesEditor({
               label="Phase photos"
               value={p.images}
               onChange={(images) => update(i, { images })}
+            />
+          </div>
+          <div className="mt-4">
+            <VideoUploader
+              label="Phase videos"
+              value={p.videos ?? []}
+              onChange={(videos) => update(i, { videos })}
             />
           </div>
         </div>
